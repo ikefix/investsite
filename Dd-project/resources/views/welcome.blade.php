@@ -1,434 +1,1098 @@
+<?php 
+$settings = \App\Models\Setting::pluck('value', 'key');
+?>
+
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Ogalearn - Invetsments</title>
-        <!-- Fonts -->
-        <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-        <!-- Styles -->
-        <style>
-            /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */html{line-height:1.15;-webkit-text-size-adjust:100%}body{margin:0}a{background-color:transparent}[hidden]{display:none}html{font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;line-height:1.5}*,:after,:before{box-sizing:border-box;border:0 solid #e2e8f0}a{color:inherit;text-decoration:inherit}svg,video{display:block;vertical-align:middle}video{max-width:100%;height:auto}.bg-white{--tw-bg-opacity: 1;background-color:rgb(255 255 255 / var(--tw-bg-opacity))}.bg-gray-100{--tw-bg-opacity: 1;background-color:rgb(243 244 246 / var(--tw-bg-opacity))}.border-gray-200{--tw-border-opacity: 1;border-color:rgb(229 231 235 / var(--tw-border-opacity))}.border-t{border-top-width:1px}.flex{display:flex}.grid{display:grid}.hidden{display:none}.items-center{align-items:center}.justify-center{justify-content:center}.font-semibold{font-weight:600}.h-5{height:1.25rem}.h-8{height:2rem}.h-16{height:4rem}.text-sm{font-size:.875rem}.text-lg{font-size:1.125rem}.leading-7{line-height:1.75rem}.mx-auto{margin-left:auto;margin-right:auto}.ml-1{margin-left:.25rem}.mt-2{margin-top:.5rem}.mr-2{margin-right:.5rem}.ml-2{margin-left:.5rem}.mt-4{margin-top:1rem}.ml-4{margin-left:1rem}.mt-8{margin-top:2rem}.ml-12{margin-left:3rem}.-mt-px{margin-top:-1px}.max-w-6xl{max-width:72rem}.min-h-screen{min-height:100vh}.overflow-hidden{overflow:hidden}.p-6{padding:1.5rem}.py-4{padding-top:1rem;padding-bottom:1rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.pt-8{padding-top:2rem}.fixed{position:fixed}.relative{position:relative}.top-0{top:0}.right-0{right:0}.shadow{--tw-shadow: 0 1px 3px 0 rgb(0 0 0 / .1), 0 1px 2px -1px rgb(0 0 0 / .1);--tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000),var(--tw-ring-shadow, 0 0 #0000),var(--tw-shadow)}.text-center{text-align:center}.text-gray-200{--tw-text-opacity: 1;color:rgb(229 231 235 / var(--tw-text-opacity))}.text-gray-300{--tw-text-opacity: 1;color:rgb(209 213 219 / var(--tw-text-opacity))}.text-gray-400{--tw-text-opacity: 1;color:rgb(156 163 175 / var(--tw-text-opacity))}.text-gray-500{--tw-text-opacity: 1;color:rgb(107 114 128 / var(--tw-text-opacity))}.text-gray-600{--tw-text-opacity: 1;color:rgb(75 85 99 / var(--tw-text-opacity))}.text-gray-700{--tw-text-opacity: 1;color:rgb(55 65 81 / var(--tw-text-opacity))}.text-gray-900{--tw-text-opacity: 1;color:rgb(17 24 39 / var(--tw-text-opacity))}.underline{text-decoration:underline}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.w-5{width:1.25rem}.w-8{width:2rem}.w-auto{width:auto}.grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}@media (min-width:640px){.sm\:rounded-lg{border-radius:.5rem}.sm\:block{display:block}.sm\:items-center{align-items:center}.sm\:justify-start{justify-content:flex-start}.sm\:justify-between{justify-content:space-between}.sm\:h-20{height:5rem}.sm\:ml-0{margin-left:0}.sm\:px-6{padding-left:1.5rem;padding-right:1.5rem}.sm\:pt-0{padding-top:0}.sm\:text-left{text-align:left}.sm\:text-right{text-align:right}}@media (min-width:768px){.md\:border-t-0{border-top-width:0}.md\:border-l{border-left-width:1px}.md\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}}@media (min-width:1024px){.lg\:px-8{padding-left:2rem;padding-right:2rem}}@media (prefers-color-scheme:dark){.dark\:bg-gray-800{--tw-bg-opacity: 1;background-color:rgb(31 41 55 / var(--tw-bg-opacity))}.dark\:bg-gray-900{--tw-bg-opacity: 1;background-color:rgb(17 24 39 / var(--tw-bg-opacity))}.dark\:border-gray-700{--tw-border-opacity: 1;border-color:rgb(55 65 81 / var(--tw-border-opacity))}.dark\:text-white{--tw-text-opacity: 1;color:rgb(255 255 255 / var(--tw-text-opacity))}.dark\:text-gray-400{--tw-text-opacity: 1;color:rgb(156 163 175 / var(--tw-text-opacity))}.dark\:text-gray-500{--tw-text-opacity: 1;color:rgb(107 114 128 / var(--tw-text-opacity))}}
-        </style>
-        <style>
-            body {
-                font-family: 'Nunito', sans-serif;
-            }
-        </style>
-         @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-         @vite(['resources/css/app.css'])
-    </head>
-    <body class="antialiased">
-        <div class="message">
-            <a href="https://t.me/Singhal_Anurag" target="_blank"><i class='bx bxl-telegram'></i></a>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ $settings['site_name'] ?? 'Default Heading' }}</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
+    <!-- GOOGLE FONT -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <!-- BOXICONS -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar">
+
+    <!-- LOGO -->
+
+    <div class="logo">
+        {{ $settings['site_name']}}
+    </div>
+
+    <!-- HAMBURGER ICON -->
+
+    <div class="hamburger" id="hamburger">
+
+        <i class='bx bx-menu'></i>
+
+    </div>
+
+    <!-- NAV LINKS -->
+
+    <ul class="nav-links" id="navLinks">
+
+        <li><a href="{{ url('/') }}">Home</a></li>
+        <li><a href="#market">Markets</a></li>
+        <li><a href="#plans">Plans</a></li>
+        <li><a href="#offer">Offers</a></li>
+        <li><a href="#features">Features</a></li>
+
+        <!-- MOBILE BUTTONS -->
+
+        <div class="mobile-buttons">
+
+            <a href="{{ route('login') }}">
+                <button class="login-btn">
+                    Login
+                </button>
+            </a>
+
+            <a href="{{ route('register') }}">
+                <button class="signup-btn">
+                    Get Started
+                </button>
+            </a>
+
         </div>
-        @include("includes.nav")
-            {{-- @if (Route::has('login'))
-                <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-                    @auth
-                        <a href="{{ url('/home') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Home</a>
-                    @else
-                        <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif --}}
+    </ul>
 
-            <div class="hero">
-                <div class="hero-container">
-                    {{-- <div class="temporary-navbar">
-                        <div class="logo">
-                            <img src="{{asset('images/dall.png')}}" alt="">
-                        </div>
-                        <div class="tem-nav-links">
-                            <ul>
-                                <li><a class="nav-link temp" href="{{ url('/') }}">{{ config('Home', 'Home') }}</a></li>
-                                <li><a class="nav-link temp" href="{{url('/about')}}">About Us</a></li>
-                                <li><a class="nav-link temp" href="">Contact</a></li>
-                                <li><a class="nav-link temp" href="">FAQ'S</a></li>
-                                <li><a class="nav-link temp" href="">Terms</a></li>
-                                <li><a class="nav-link temp" href="">Support</a></li>
-                            </ul>
-                        </div>
-                    </div> --}}
-                    <div class="hero-content">
-                        <div>
-                            <h1>A trusted and secure <br> bitcoin and crypto <br> platform</h1>
-                            <h2>Start Now</h2>
-                            <h3 class="typing"></h3>
-                        </div>
-                    </div>
-                    <div class="hero-crypto-chart">
-                    </div>
-                </div>
+    <!-- DESKTOP BUTTONS -->
+
+    <div class="nav-buttons">
+
+        <a href="{{ route('login') }}">
+            <button class="login-btn">
+                Login
+            </button>
+        </a>
+
+        <a href="{{ route('register') }}">
+            <button class="signup-btn">
+                Get Started
+            </button>
+        </a>
+
+    </div>
+
+</header>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="hero-left">
+
+        <div class="hero-badge">
+            Trusted by 50,000+ investors worldwide
+        </div>
+
+        <h1>
+            Leading The Way In <br>
+            Online <span>Mirror Trading</span>
+        </h1>
+
+        <p>{{ $settings['hero_text'] ?? 'Default hero description goes here.' }}</p>
+
+        <div class="hero-buttons">
+
+            <a href="{{ route('register') }}">
+                <button class="start-btn">Join Now</button>
+            </a>
+
+            <a href="#market">
+                <button class="market-btn">View Market</button>
+            </a>
+
+        </div>
+
+        <div class="hero-features">
+
+            <div class="feature-box">
+                <h4>Secure & Safe</h4>
+                <p>Bank-level security</p>
             </div>
 
-            <div class="join">
-                <div class="join-container">
-                    <div class="join-h2">
-                        <h1>How To Join</h1>
-                        <h2>Get Started In Three Easy Steps</h2>
-                    </div>
-                    <div class="join-steps">
-                        <div>
-                            <img src="{{asset('images/register.png')}}" alt="">
-                            <h2>Register</h2>
-                            <p>Conplete our easy sign up form on the sign up page by clicking on this <a class="nav-link" href="{{ route('login') }}">Link</a></p>
-                        </div>
-                        <img class="line" src="{{asset('images/line.png')}}" alt="">
-                        <div>
-                            <img src="{{asset('images/plan.png')}}" alt="">
-                            <h2>Choose a plan</h2>
-                            <p>Log in to your Investment dashboard and choose an investment plan of your choice to kickstart you investment plan</p>
-                        </div>
-                        <img class="line2" src="{{asset('images/line.png')}}" alt="">
-                        <div>
-                            <img src="{{asset('images/earn.png')}}" alt="">
-                            <h2>Earn Rewards</h2>
-                            <p>After you have selected an investment plan, just relax and watch your earnong sky-rocket</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="feature-box">
+                <h4>Low Fees</h4>
+                <p>Transparent pricing</p>
             </div>
 
-            <div class="about" id="about">
-                <div class="about-container">
-                    <div class="about-image">
-                        <img src="{{asset('images/about-image.webp')}}" alt="">
-                    </div>
-                    <div class="about-content">
-                        <div class="about-text">
-                            <h1>We Care About how Your Money <br> makes earnings for you.</h1>
-                            <h3>bitofxinvestment.com is a registered and legal international investment trading company based in Poland and with the vision of becoming a prominent player in the crypto industry. Since then, we have diligently worked towards building our brand and have successfully gained the trust of customers in more than 250 countries worldwide. Our commitment to providing secure and dependable services has contributed to our standing as a leading brand.</h3>
-                        </div>
-                        <div class="tabTitles">
-                            <button class="tabLinks active" onclick="opentab('skills')">Reason</button>
-                            <button class="tabLinks" onclick="opentab('experience')">Trust</button>
-                            <button class="tabLinks" onclick="opentab('education')">Growth</button>
-                        </div>
-                        <div class="tabContents active-content" id="skills">
-                            <h4>Investing in cryptocurrency can be intimidating, especially for beginners. Sometimes managing a crypto investment is daunting due to the uncertainty and volatility of the market, as well as the time investment needed to be successful.</h4>
-                        </div>
-                        <div class="tabContents" id="experience">
-                            <h4>Investing in cryptocurrency requires confidence, and trust is the foundation of every successful investment. We prioritize transparency, ensuring that you always have a clear view of your portfolio and market trends.</h4>
-                        </div>
-                        <div class="tabContents" id="education">
-                            <h4>Every investment should lead to progress, and we make sure yours does. Our strategies are designed to foster consistent, sustainable growth, leveraging advanced market analysis and trend predictions to maximize your returns. We don’t just focus on short-term gains—we build pathways for long-term financial success. </h4>
-                        </div>
-                    </div>
-                </div>
+            <div class="feature-box">
+                <h4>24/7 Support</h4>
+                <p>We're here to help</p>
             </div>
 
-            <div class="plan">
-                <div class="plan-container">
-                    <div class="plan-h1">
-                        <h1>Our Plans</h1>
-                        <h2>Become part of a global community of people who have found <br>
-                            their path to the crypto world</h2>
-                    </div>
-                    <div class="plan-package">
-                        <div class="plan-pack-content">
-                            <div class="pack-head">
-                                <h5>STARTER PLAN</h5>
-                                <h1>5% after 24 hours</h1>
-                                <span></span>
-                            </div>
-                            <div class="pack-body">
-                                <h5>Min: 50$</h5>
-                                <h5>Max: 299$</h5>
-                            </div>
-                            <div class="pack-footer">
-                                <h5>Duration: 24 hours</h5>
-                                <h5>Profit withdraw: yes</h5>
-                                <h5>Referral Commission: 10%</h5>
-                            </div>
-                            <div class="pack-link">
-                                <a href="">Select Plan</a>
-                            </div>
-                        </div>
-                        <div class="plan-pack-content">
-                            <div class="pack-head">
-                                <h5>BRONZE PLAN</h5>
-                                <h1>10% Daily for 48 hours</h1>
-                                <span></span>
-                            </div>
-                            <div class="pack-body">
-                                <h5>Min: 300$</h5>
-                                <h5>Max: 499$</h5>
-                            </div>
-                            <div class="pack-footer">
-                                <h5>Duration: 48 hours </h5>
-                                <h5>Profit withdraw: yes</h5>
-                                <h5>Referral Commission: 10%</h5>
-                            </div>
-                            <div class="pack-link">
-                                <a href="">Select Plan</a>
-                            </div>
-                        </div>
-                        <div class="plan-pack-content">
-                            <div class="pack-head">
-                                <h5>GOLD PLAN</h5>
-                                <h1>15% Daily for 4 days</h1>
-                                <span></span>
-                            </div>
-                            <div class="pack-body">
-                                <h5>MIN: 500$</h5>
-                                <h5>MAX: 999$</h5>
-                            </div>
-                            <div class="pack-footer">
-                                <h5>DURATION: 4 days</h5>
-                                <h5>Profit withdraw: yes</h5>
-                                <h5>REFERRAL COMMISSION: 10%</h5>
-                            </div>
-                            <div class="pack-link">
-                                <a href="">Select Plan</a>
-                            </div>
-                        </div>
-                        <div class="plan-pack-content">
-                            <div class="pack-head">
-                                <h5>PROMO PLAN</h5>
-                                <h1>30% daily for 5 days</h1>
-                                <span></span>
-                            </div>
-                            <div class="pack-body">
-                                <h5>Min: 500$</h5>
-                                <h5>Max: 4999$</h5>
-                            </div>
-                            <div class="pack-footer">
-                                <h5>Duration: 5 days </h5>
-                                <h5>Profit Withdraw:  yes</h5>
-                                <h5>Referral Commission 10% yes</h5>
-                            </div>
-                            <div class="pack-link">
-                                <a href="">Select Plan</a>
-                            </div>
-                        </div>
-                        <div class="plan-pack-content">
-                            <div class="pack-head">
-                                <h5>DIAMOND PLAN</h5>
-                                <h1>20% DAILY FOR 7 DAYS</h1>
-                                <span></span>
-                            </div>
-                            <div class="pack-body">
-                                <h5>MIN: 1000$</h5>
-                                <h5>MAX: 4999$</h5>
-                            </div>
-                            <div class="pack-footer">
-                                <h5>DURATION: 7 DAYS</h5>
-                                <h5>PROFIT WITHDRAW: YES</h5>
-                                <h5>REFERRAL COMMISSION: 10%</h5>
-                            </div>
-                            <div class="pack-link">
-                                <a href="">Select Plan</a>
-                            </div>
-                        </div>
-                        <div class="plan-pack-content">
-                            <div class="pack-head">
-                                <h5>GOLDEN PROMO PLAN</h5>
-                                <h1>38% Daily for 12 days</h1>
-                                <span></span>
-                            </div>
-                            <div class="pack-body">
-                                <h5>Min: 5000$</h5>
-                                <h5>Min: No Limit</h5>
-                            </div>
-                            <div class="pack-footer">
-                                <h5>Duration: 12 days </h5>
-                                <h5>Profit withdraw: yes</h5>
-                                <h5>Referral Commission: 10%</h5>
-                            </div>
-                            <div class="pack-link">
-                                <a href="">Select Plan</a>
-                            </div>
-                        </div>
-                        <div class="plan-pack-content">
-                            <div class="pack-head">
-                                <h5>PLATINUM PLAN</h5>
-                                <h1>25% DAILY FOR 12 DAYS</h1>
-                                <span></span>
-                            </div>
-                            <div class="pack-body">
-                                <h5>MIN: 5000$</h5>
-                                <h5>Min: NO LIMIT</h5>
-                            </div>
-                            <div class="pack-footer">
-                                <h5>DURATION: 12 DAYS</h5>
-                                <h5>PROFIT WITHDRAW: YES</h5>
-                                <h5>REFERRAL COMMISSION: 10%</h5>
-                            </div>
-                            <div class="pack-link">
-                                <a href="">Select Plan</a>
-                            </div>
-                        </div>
-                        <div class="plan-pack-content">
-                            <div class="pack-head">
-                                <h5>FAMILY JOINT ACCOUNT</h5>
-                                <h1>50% Daily for 2 months (60 Days)</h1>
-                                <span></span>
-                            </div>
-                            <div class="pack-body">
-                                <h5>MIN: 7000$</h5>
-                                <h5>Min: UNLIMITED</h5>
-                            </div>
-                            <div class="pack-footer">
-                                <h5>DURATION: 60 Days</h5>
-                                <h5>PROFIT WITHDRAW: YES</h5>
-                                <h5>REFERRAL COMMISSION: 10%</h5>
-                            </div>
-                            <div class="pack-link">
-                                <a href="">Select Plan</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="feature-box">
+                <h4>Day Trader</h4>
+                <p>open Day-to-Day trades</p>
             </div>
 
-            <div class="perform">
-                <div class="perform-container">
-                    <div class="perform-left">
-                        <div class="left-top">
-                            <div class="left-top-con">
-                                <div class="left-icon">
-                                    <i class='bx bxs-coin-stack'></i>
-                                </div>
-                                <div>
-                                    <h2>Get More Profit</h2>
-                                    <p>More than 25 million users globally</p>
-                                </div>
-                            </div>
-                            <div class="left-top-con">
-                                <div class="left-icon">
-                                    <i class='bx bx-support'></i>
-                                </div>
-                                <div>
-                                    <h2>24/7 Support</h2>
-                                    <p>Powered by an amazing customer service</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="left-bottom">
-                            <div class="left-bottom-con">
-                                <div class="left-icon">
-                                    <i class='bx bx-shield'></i>
-                                </div>
-                                <div>
-                                    <h2>Strong Protection</h2>
-                                    <p>Utilising top-tier security practices</p>
-                                </div>
-                            </div>
-                            <div class="left-bottom-con">
-                                <div class="left-icon">
-                                    <i class='bx bx-user-check'></i>
-                                </div>
-                                <div>
-                                    <h2>Reliability</h2>
-                                    <p>Regulated by various authorities around the world</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="perform-right">
-                        <h1>High Performance Investment</h1>
-                        <p>Use our innovative tech infrastructure to offer a state-of-the-art trading experience to you. Leverage our trading and custody platform and get 24/7 access to the world of crypto investments.</p>
-                    </div>
-                </div>
+        </div>
+
+    </div>
+
+    <div class="hero-right">
+
+        <div class="dashboard-card">
+
+            <img src="https://images.unsplash.com/photo-1642104704074-907c0698cbd9?q=80&w=1170&auto=format&fit=crop" alt="Dashboard">
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- MARKET -->
+
+<!-- ========================= -->
+<!-- HOW IT WORKS SECTION -->
+<!-- ========================= -->
+
+<section class="steps-section">
+
+    <!-- TITLE -->
+
+    <div class="steps-title">
+
+        <span>How It’s Work</span>
+
+        <h1>
+            <span>Start Trading</span>
+            on Your Terms
+        </h1>
+
+    </div>
+
+    <!-- STEPS -->
+
+    <div class="steps-container">
+
+        <!-- STEP 1 -->
+
+        <div class="step-card">
+
+            <div class="step-icon">
+                <i class='bx bx-user-plus'></i>
             </div>
 
-            <div class="payment">
-                <div class="payment-container">
-                    <div class="payment-h1">
-                        <h1>ACCEPTED PAYMENT METHODS</h1>
-                        <p>SECURE PAYMENT WITH SSL ENCRYPTION</p>
-                    </div>
-                    <div class="payment-options">
-                        <div><i class='bx bxl-bitcoin'></i>bitcoin</div>
-                        <div><i class='bx bxs-diamond bx-rotate-180' ></i>ethereum</div>
-                        <div>tether</div>
-                        <div>Perfect Money</div>
-                        <div>PAYEER</div>
-                    </div>
-                </div>
+            <h2>
+                Open <br>
+                your account
+            </h2>
+
+            <p>
+                Create an account with us
+            </p>
+
+            <div class="step-bottom">
+                Step 01
             </div>
 
-            <div class="footer">
-                <div class="footer-container">
-                    <div class="first-section">
-                        <div>
-                            <h3>About Company</h3>
-                            <span></span>
-                            <p>ul. Podbipięty Longinusa 41, Kraków, 31-980, Poland.
-                                    Email: admin@bitofxinvestment.com
-                                    Email: support@bitofxinvestment.com
-                            </p>
-                        </div>
-                    </div>
-                    <div class="second-section">
-                        <h3>Useful Links</h3>
-                        <span></span>
-                        <li>
-                            <a href="{{ url('/home') }}">Home</a>
-                            <a href="{{ route('login') }}">Log In</a>
-                            <a href="{{ route('register') }}">Register</a>
-                        </li>
-                    </div>
-                    <div class="third-section">
-                        <h3>Company</h3>
-                        <span></span>
-                        <li>
-                            <a href="#about">About Us</a>
-                            <a href="#a">Contact us</a>
-                        </li>
-                    </div>
-                </div>
-                <h5>Copyright © 2025 Ogalearn - Investment.com All rights reserved. Made By Wills institute</h5>
+        </div>
+
+        <!-- ARROW -->
+
+        <div class="step-arrow">
+            <i class='bx bx-right-arrow-alt'></i>
+        </div>
+
+        <!-- STEP 2 -->
+
+        <div class="step-card">
+
+            <div class="step-icon">
+                <i class='bx bx-wallet'></i>
             </div>
-    </body>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.1.0/typed.umd.js" integrity="sha512-+2pW8xXU/rNr7VS+H62aqapfRpqFwnSQh9ap6THjsm41AxgA0MhFRtfrABS+Lx2KHJn82UOrnBKhjZOXpom2LQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script>
-        //TYPE WRITER EFFECT
-        var typed = new Typed(".typing", {
-            strings:["", "We specialise on Making money", "", "We are extremely cheap", "", "Our services are affordable", "", "We give you the best offer", "", "Ethical Hacker", "", "Youtuber"],
-            typeSpeed:100,
-            BackSpeed:300,
-            loop:true
-        })
+
+            <h2>
+                Make <br>
+                Deposit
+            </h2>
+
+            <p>
+                Fund your trading wallet
+            </p>
+
+            <div class="step-bottom">
+                Step 02
+            </div>
+
+        </div>
+
+        <!-- ARROW -->
+
+        <div class="step-arrow">
+            <i class='bx bx-right-arrow-alt'></i>
+        </div>
+
+        <!-- ACTIVE STEP -->
+
+        <div class="step-card active-step">
+
+            <div class="step-icon">
+                <i class='bx bx-line-chart'></i>
+            </div>
+
+            <h2>
+                Select a Trader <br>
+                to Copy
+            </h2>
+
+            <p>
+                Start automated trading
+            </p>
+
+            <div class="step-bottom">
+                Step 03
+            </div>
+
+        </div>
+
+        <!-- ARROW -->
+
+        <div class="step-arrow">
+            <i class='bx bx-right-arrow-alt'></i>
+        </div>
+
+        <!-- STEP 4 -->
+
+        <div class="step-card">
+
+            <div class="step-icon">
+                <i class='bx bx-dollar-circle'></i>
+            </div>
+
+            <h2>
+                Relax and <br>
+                make money
+            </h2>
+
+            <p>
+                Earn passive daily profits
+            </p>
+
+            <div class="step-bottom">
+                Step 04
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- FOOT TEXT -->
+
+    <p class="steps-footer">
+
+        Everything you need to trade Forex in one place.
+
+    </p>
+
+</section>
 
 
-        // FOR ABOUT EFFECT
-        const tabLinks = document.getElementsByClassName("tabLinks");
-        const tabContents = document.getElementsByClassName("tabContents");
+<!-- ========================= -->
+<!-- LIVE MARKET TICKER -->
+<!-- ========================= -->
 
-        function opentab(tabname) {
-            for(tabLink of tabLinks){
-                tabLink.classList.remove("active");
-            }
-            for(tabContent of tabContents){
-                tabContent.classList.remove("active-content");
-            }
-            event.currentTarget.classList.add("active");
-            document.getElementById(tabname).classList.add("active-content")
+<section class="ticker-section" id="market">
+
+    <div class="ticker-wrapper">
+
+        <div class="ticker-track">
+
+            <!-- FIRST LOOP -->
+
+            @foreach($data as $coin)
+
+                <div class="ticker-item">
+
+                    <img src="{{ $coin['image'] }}" alt="">
+
+                    <div class="ticker-info">
+
+                        <h4>
+                            {{ strtoupper($coin['symbol']) }}/USD
+                        </h4>
+
+                        <p>
+                            ${{ number_format($coin['current_price'], 2) }}
+                        </p>
+
+                    </div>
+
+                    <span class="
+                        {{ $coin['price_change_percentage_24h'] >= 0
+                        ? 'positive'
+                        : 'negative' }}
+                    ">
+
+                        {{ number_format($coin['price_change_percentage_24h'], 2) }}%
+
+                    </span>
+
+                </div>
+
+            @endforeach
+
+            <!-- DUPLICATE FOR INFINITE SLIDE -->
+
+            @foreach($data as $coin)
+
+                <div class="ticker-item">
+
+                    <img src="{{ $coin['image'] }}" alt="">
+
+                    <div class="ticker-info">
+
+                        <h4>
+                            {{ strtoupper($coin['symbol']) }}/USD
+                        </h4>
+
+                        <p>
+                            ${{ number_format($coin['current_price'], 2) }}
+                        </p>
+
+                    </div>
+
+                    <span class="
+                        {{ $coin['price_change_percentage_24h'] >= 0
+                        ? 'positive'
+                        : 'negative' }}
+                    ">
+
+                        {{ number_format($coin['price_change_percentage_24h'], 2) }}%
+
+                    </span>
+
+                </div>
+
+            @endforeach
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ========================= -->
+<!-- FOREX HERO SECTION -->
+<!-- ========================= -->
+
+<section class="forex-section">
+
+    <div class="forex-container">
+
+        <!-- LEFT -->
+
+        <div class="forex-left">
+
+            <span class="forex-tag">
+                Trade Forex
+            </span>
+
+            <h1>
+                Forex Markets <br>
+                with Competitive Prices
+            </h1>
+
+            <h3>
+                Trade Over 140 FX Pairs
+            </h3>
+
+            <p>
+                Major pairs like EUR/USD and GBP/USD dominate
+                the market, while exotic pairs involve currencies
+                from smaller economies. The Forex market is known
+                for its liquidity, providing ample opportunities
+                for traders to engage in transactions.
+            </p>
+
+            <a href="#" class="forex-btn">
+
+                Get Started
+
+                <span>↘</span>
+
+            </a>
+
+        </div>
+
+        <!-- RIGHT -->
+
+        <div class="forex-right">
+
+            <img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1200&auto=format&fit=crop" alt="">
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- PLANS -->
+
+<section class="plan-section" id="plans">
+
+    <div class="section-title">
+        <h2>Investment Plans</h2>
+        <p>Choose a plan that suits your financial goals</p>
+    </div>
+
+    <div class="plan-grid">
+
+        <div class="plan-card">
+
+            <h2>Basic Plan</h2>
+
+            <h1>25%</h1>
+
+            <p>Daily Return</p>
+
+            <ul>
+                <li><b>Minimum Invest:</b> $5,000</li>
+                <li><b>Maximum Invest:</b> $10,000</li>
+                <li><b>24/7</b> Support</li>
+                <li><b>Capital Return:</b> Yes</li>
+            </ul>
+
+            <a href="{{ route('login') }}"><button>Invest Now</button></a>
+
+        </div>
+
+        <div class="plan-card active">
+
+            <h2>Standard Plan</h2>
+
+            <h1>35%</h1>
+
+            <p>Daily Return</p>
+
+             <ul>
+                <li><b>Minimum Invest:</b> $10,000</li>
+                <li><b>Maximum Invest:</b> $50,000</li>
+                <li><b>24/7</b> Support</li>
+                <li><b>Capital Return:</b> Yes</li>
+            </ul>
+
+            <a href="{{ route('login') }}"><button>Invest Now</button></a>
+
+        </div>
+
+        <div class="plan-card">
+
+            <h2>Premium Plan</h2>
+
+            <h1>50%</h1>
+
+            <p>Daily Return</p>
+
+            <ul>
+                <li><b>Minimum Invest:</b> $50,000</li>
+                <li><b>Maximum Invest:</b> $100,000</li>
+                <li><b>24/7</b> Support</li>
+                <li><b>Capital Return:</b> Yes</li>
+            </ul>
+
+            <a href="{{ route('login') }}"><button>Invest Now</button></a>
+
+        </div>
+
+        <div class="plan-card">
+
+            <h2>Institutional Plan</h2>
+
+            <h1>65%</h1>
+
+            <p>Daily Return</p>
+
+            <ul>
+                <li><b>Minimum Invest:</b> $100,000</li>
+                <li><b>Maximum Invest:</b> $1,800,000</li>
+                <li><b>24/7</b> Support</li>
+                <li><b>Capital Return:</b> Yes</li>
+            </ul>
+
+            <a href="{{ route('login') }}"><button>Invest Now</button></a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- DASHBOARD -->
+
+<section class="dashboard-preview">
+
+    <div class="dashboard-left">
+
+        <h2>
+            Powerful Investment Dashboard
+        </h2>
+
+        <p>
+            Monitor your profits, withdrawals, deposits,
+            and investment growth using advanced analytics
+            and live market tracking.
+        </p>
+
+        <button>Open Dashboard</button>
+
+    </div>
+
+    <div class="dashboard-right">
+
+        <img src="https://images.unsplash.com/photo-1518546305927-5a555bb7020d?q=80&w=1200&auto=format&fit=crop" alt="Dashboard">
+
+    </div>
+
+</section>
+
+<!-- SERVICES SECTION -->
+
+<section class="services-section" id="offer">
+
+    <div class="services-container">
+
+        <!-- CARD 1 -->
+
+        <div class="service-card">
+
+            <div class="service-icon">
+                <i class='bx bx-line-chart'></i>
+            </div>
+
+            <h5>WE OFFER</h5>
+
+            <h2>Copy Trading</h2>
+
+            <p>
+                Replicate and execute the positions
+                taken by experienced traders.
+            </p>
+
+            <a href="#">
+                Read More
+                <span>↘</span>
+            </a>
+
+        </div>
+
+        <!-- ACTIVE CARD -->
+
+        <div class="service-card active-card">
+
+            <div class="service-icon">
+                <i class='bx bx-bar-chart-alt-2'></i>
+            </div>
+
+            <h5>WE OFFER</h5>
+
+            <h2>Stocks Trading</h2>
+
+            <p>
+                Participate in the growth and success
+                of publicly traded companies.
+            </p>
+
+            <a href="#">
+                Read More
+                <span>↘</span>
+            </a>
+
+        </div>
+
+        <!-- CARD 3 -->
+
+        <div class="service-card">
+
+            <div class="service-icon">
+                <i class='bx bx-trending-up'></i>
+            </div>
+
+            <h5>WE OFFER</h5>
+
+            <h2>Options Trading</h2>
+
+            <p>
+                Options trading has emerged as a
+                powerful tool for investors.
+            </p>
+
+            <a href="#">
+                Read More
+                <span>↘</span>
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- WHY CHOOSE US -->
+
+<section class="choose-section">
+
+    <div class="choose-overlay"></div>
+
+    <div class="choose-container">
+
+        <!-- LEFT -->
+
+        <div class="choose-left">
+
+            <h1>
+                Why <span>Choose Us</span>
+            </h1>
+
+            <div class="choose-grid">
+
+                <!-- CARD -->
+
+                <div class="choose-card">
+
+                    <div class="choose-content">
+
+                        <h2>Friendly & Expert</h2>
+
+                        <p>
+                            We have seasoned experts in stock
+                            trading and investment analysis.
+                        </p>
+
+                    </div>
+
+                    <div class="choose-bottom">
+
+                        <i class='bx bx-user'></i>
+
+                    </div>
+
+                </div>
+
+                <!-- CARD -->
+
+                <div class="choose-card active-choose">
+
+                    <div class="choose-content">
+
+                        <h2>24/7 Support</h2>
+
+                        <p>
+                            Our support team is always available
+                            to respond to your questions.
+                        </p>
+
+                    </div>
+
+                    <div class="choose-bottom">
+
+                        <i class='bx bx-headphone'></i>
+
+                    </div>
+
+                </div>
+
+                <!-- CARD -->
+
+                <div class="choose-card">
+
+                    <div class="choose-content">
+
+                        <h2>Demo Account</h2>
+
+                        <p>
+                            Practice and learn investing before
+                            trading with real money.
+                        </p>
+
+                    </div>
+
+                    <div class="choose-bottom">
+
+                        <i class='bx bx-network-chart'></i>
+
+                    </div>
+
+                </div>
+
+                <!-- CARD -->
+
+                <div class="choose-card active-choose">
+
+                    <div class="choose-content">
+
+                        <h2>Award Winner</h2>
+
+                        <p>
+                            Recognized globally for excellence
+                            in investment services.
+                        </p>
+
+                    </div>
+
+                    <div class="choose-bottom">
+
+                        <i class='bx bx-medal'></i>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ========================= -->
+<!-- MARKET CAROUSEL SECTION -->
+<!-- ========================= -->
+
+<section class="market-carousel-section">
+
+    <!-- TOP -->
+
+    <div class="market-top">
+
+        <div class="market-title">
+
+            <span>Markets</span>
+
+            <h1>
+                Wide Range of
+                <span>Markets</span>
+            </h1>
+
+        </div>
+
+        <!-- ARROWS -->
+
+        <div class="market-arrows">
+
+            <button class="arrow-btn" id="prevBtn">
+                <i class='bx bx-left-arrow-alt'></i>
+            </button>
+
+            <button class="arrow-btn" id="nextBtn">
+                <i class='bx bx-right-arrow-alt'></i>
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- SLIDER -->
+
+    <div class="market-slider-wrapper">
+
+        <div class="market-slider" id="marketSlider">
+
+            <!-- CARD -->
+
+            <div class="market-slide">
+
+                <img src="https://images.unsplash.com/photo-1610375461246-83df859d849d?q=80&w=1200&auto=format&fit=crop" alt="">
+
+                <div class="market-card-content">
+
+                    <h2>Fixed Income</h2>
+
+                    <p>
+                        Fixed income assets generate
+                        stable earnings through periodic
+                        interest payments.
+                    </p>
+
+                    <a href="#">
+                        Read More
+                        <span>↘</span>
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- CARD -->
+
+            <div class="market-slide">
+
+                <img src="https://images.unsplash.com/photo-1518546305927-5a555bb7020d?q=80&w=1200&auto=format&fit=crop" alt="">
+
+                <div class="market-card-content">
+
+                    <h2>Infrastructure</h2>
+
+                    <p>
+                        Invest in infrastructure projects
+                        with long-term sustainable growth.
+                    </p>
+
+                    <a href="#">
+                        Read More
+                        <span>↘</span>
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- CARD -->
+
+            <div class="market-slide">
+
+                <img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1200&auto=format&fit=crop" alt="">
+
+                <div class="market-card-content">
+
+                    <h2>Trade Forex</h2>
+
+                    <p>
+                        Trade major and minor currency
+                        pairs in the global forex market.
+                    </p>
+
+                    <a href="#">
+                        Read More
+                        <span>↘</span>
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- CARD -->
+
+            <div class="market-slide">
+
+                <img src="https://images.unsplash.com/photo-1640161704729-cbe966a08476?q=80&w=1200&auto=format&fit=crop" alt="">
+
+                <div class="market-card-content">
+
+                    <h2>Crypto Assets</h2>
+
+                    <p>
+                        Explore cryptocurrency investments
+                        with secure trading solutions.
+                    </p>
+
+                    <a href="#">
+                        Read More
+                        <span>↘</span>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- BOXICONS -->
+
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <div class="footer-top">
+
+        <div class="footer-logo">
+            <h2>InvestPro</h2>
+            <p>Modern stock investment platform.</p>
+        </div>
+
+        <div class="footer-links">
+
+            <h3>Quick Links</h3>
+
+            <ul>
+                <li><a href="{{ url('/') }}">Home</a></li>
+                <li><a href="#market">Markets</a></li>
+                <li><a href="#plans">Plans</a></li>
+                <li><a href="#offer">Offers</a></li>
+                <li><a href="#features">Features</a></li>
+            </ul>
+
+        </div>
+
+        <div class="footer-links">
+
+            <h3>Resources</h3>
+
+            <ul>
+                <li><a href="{{ route('login') }}">Login</a></li>
+                <li><a href="{{ route('register') }}">Get Started</a></li>
+                <li><a href="{{ url('/') }}">Home</a></li>
+            </ul>
+
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        © 2026 InvestPro. All Rights Reserved.
+    </div>
+
+</footer>
+
+
+<script>
+
+const hamburger = document.getElementById("hamburger");
+const navLinks = document.getElementById("navLinks");
+const menuIcon = hamburger.querySelector("i");
+
+hamburger.addEventListener("click", () => {
+
+    navLinks.classList.toggle("active");
+
+    // CHANGE ICON
+
+    if(navLinks.classList.contains("active")){
+
+        menuIcon.classList.remove("bx-menu");
+        menuIcon.classList.add("bx-x");
+
+    }else{
+
+        menuIcon.classList.remove("bx-x");
+        menuIcon.classList.add("bx-menu");
+
+    }
+
+});
+
+</script>
+
+<script>
+
+const slider = document.getElementById("marketSlider");
+
+const nextBtn = document.getElementById("nextBtn");
+
+const prevBtn = document.getElementById("prevBtn");
+
+const cardWidth = 380;
+
+/* ========================= */
+/* BUTTON SLIDE */
+/* ========================= */
+
+nextBtn.onclick = () => {
+
+    slider.scrollBy({
+        left: cardWidth,
+        behavior: "smooth"
+    });
+
+};
+
+prevBtn.onclick = () => {
+
+    slider.scrollBy({
+        left: -cardWidth,
+        behavior: "smooth"
+    });
+
+};
+
+/* ========================= */
+/* AUTO INFINITE SLIDE */
+/* ========================= */
+
+let autoSlide = setInterval(() => {
+
+    /* IF END REACHED */
+
+    if (
+        slider.scrollLeft + slider.clientWidth
+        >= slider.scrollWidth - 5
+    ) {
+
+        slider.scrollTo({
+            left: 0,
+            behavior: "smooth"
+        });
+
+    }
+
+    else{
+
+        slider.scrollBy({
+            left: cardWidth,
+            behavior: "smooth"
+        });
+
+    }
+
+}, 3000);
+
+/* ========================= */
+/* PAUSE ON HOVER */
+/* ========================= */
+
+slider.addEventListener("mouseenter", () => {
+
+    clearInterval(autoSlide);
+
+});
+
+/* ========================= */
+/* RESUME */
+/* ========================= */
+
+slider.addEventListener("mouseleave", () => {
+
+    autoSlide = setInterval(() => {
+
+        if (
+            slider.scrollLeft + slider.clientWidth
+            >= slider.scrollWidth - 5
+        ) {
+
+            slider.scrollTo({
+                left: 0,
+                behavior: "smooth"
+            });
+
         }
 
+        else{
 
+            slider.scrollBy({
+                left: cardWidth,
+                behavior: "smooth"
+            });
 
-        
-        // document.addEventListener("DOMContentLoaded", function () {
-        //     let navbar = document.querySelector(".navbar");
-        //     let lastScrollTop = 0;
-        
-        //     window.addEventListener("scroll", function () {
-        //         let scrollTop = window.scrollY || document.documentElement.scrollTop;
-        
-        //         if (scrollTop > 50) {
-        //             navbar.classList.add("show"); // Show navbar when scrolling down
-        //         } else {
-        //             navbar.classList.remove("show"); // Hide navbar when at the top
-        //         }
-        //     });
-        // });
-    </script>
+        }
+
+    }, 3000);
+
+});
+
+</script>
+
+</body>
 </html>

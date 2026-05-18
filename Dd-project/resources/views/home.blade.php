@@ -1,5 +1,6 @@
     @extends('layouts.app')
-    @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/css/app.css'])
+    
+    <link rel="stylesheet" href="{{ asset('resources/css/app.css') }}">
     @section('content')
     <div class="home-container">
         <div class="message">
@@ -30,15 +31,15 @@
             <div class="hero-head">
                 <h2></h2>
                 <div class="head-pay">
-                    <a href=""><i class='bx bx-cog'></i> Invest</a>
-                    <a href=""><i class='bx bx-printer' ></i> Withdraw</a>
+                    <a href="{{url('/plans')}}"><i class='bx bx-cog'></i> Invest</a>
+                    <a href="{{url('/withdraw')}}"><i class='bx bx-printer' ></i> Withdraw</a>
                 </div>
             </div>
             <div class="hero-body">
                 <div class="dashboard-container">
                     <div class="card">
                         <h6>Total Balance</h6>
-                        <h4>$0</h4>
+                        <h4>${{ number_format(auth()->user()->balance->balance ?? 0, 2) }}</h4>
                         <div class="graph-container">
                             <svg id="graph1">
                                 <defs>
@@ -54,7 +55,7 @@
                     </div>
                     <div class="card">
                         <h6>Active Investment</h6>
-                        <h4>$0.00</h4>
+                        <h4>${{ number_format(auth()->user()->depositBalance->balance ?? 0, 2) }}</h4>
                         <div class="graph-container">
                             <svg id="graph2">
                                 <defs>

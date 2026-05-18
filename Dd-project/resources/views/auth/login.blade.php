@@ -1,79 +1,179 @@
 @extends('layouts.app')
 
-@vite(['resources/css/app.css'])
+<link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
 @section('content')
 
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+<section class="auth-section">
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
+    <div class="auth-container">
 
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+        <!-- LEFT SIDE -->
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+        <div class="auth-left">
 
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+            <span class="auth-tag">
+                Welcome Back
+            </span>
 
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
+            <h1>
+                Access Your <br>
+                Trading Account
+            </h1>
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+            <p>
+                Monitor your investments, track market trends,
+                and manage your portfolio securely from anywhere.
+            </p>
 
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+            <div class="auth-features">
 
-                        <div class="row mb-3">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                                {{-- <div class="log-span">
-                                    <a class="nav-link" href="{{ route('register') }}">Join Us Now</a>
-                                </div> --}}
-                            </div>
-                        </div>
-                    </form>
+                <div class="auth-feature">
+                    <i class='bx bx-shield-quarter'></i>
+                    <span>Protected & Secure Login</span>
                 </div>
+
+                <div class="auth-feature">
+                    <i class='bx bx-line-chart'></i>
+                    <span>Real-Time Market Tracking</span>
+                </div>
+
+                <div class="auth-feature">
+                    <i class='bx bx-wallet'></i>
+                    <span>Fast Deposits & Withdrawals</span>
+                </div>
+
             </div>
+
         </div>
+
+        <!-- RIGHT SIDE -->
+
+        <div class="auth-right">
+
+            <div class="auth-card">
+
+                <h2>
+                    Login Account
+                </h2>
+
+                <form method="POST" action="{{ route('login') }}">
+
+                    @csrf
+
+                    <!-- EMAIL -->
+
+                    <div class="input-group-auth">
+
+                        <label>Email Address</label>
+
+                        <input
+                            id="email"
+                            type="email"
+                            class="@error('email') is-invalid @enderror"
+                            name="email"
+                            value="{{ old('email') }}"
+                            required
+                            autocomplete="email"
+                            autofocus
+                            placeholder="Enter your email"
+                        >
+
+                        @error('email')
+                            <span class="error-text">
+                                {{ $message }}
+                            </span>
+                        @enderror
+
+                    </div>
+
+                    <!-- PASSWORD -->
+
+                    <div class="input-group-auth">
+
+                        <label>Password</label>
+
+                        <input
+                            id="password"
+                            type="password"
+                            class="@error('password') is-invalid @enderror"
+                            name="password"
+                            required
+                            autocomplete="current-password"
+                            placeholder="Enter your password"
+                        >
+
+                        @error('password')
+                            <span class="error-text">
+                                {{ $message }}
+                            </span>
+                        @enderror
+
+                    </div>
+
+                    <!-- REMEMBER -->
+
+                    <div class="remember-box">
+
+                        <div class="remember-left">
+
+                            <input
+                                type="checkbox"
+                                name="remember"
+                                id="remember"
+                                {{ old('remember') ? 'checked' : '' }}
+                            >
+
+                            <label for="remember">
+                                Remember Me
+                            </label>
+
+                        </div>
+
+                        @if (Route::has('password.request'))
+
+                            <a href="{{ route('password.request') }}">
+
+                                Forgot Password?
+
+                            </a>
+
+                        @endif
+
+                    </div>
+
+                    <!-- BUTTON -->
+
+                    <button type="submit" class="auth-btn">
+
+                        Login Account
+
+                    </button>
+
+                    <!-- REGISTER -->
+
+                    <div class="auth-bottom">
+
+                        <span>
+                            Don’t have an account?
+                        </span>
+
+                        <a href="{{ route('register') }}">
+                            Create One
+                        </a>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
     </div>
-</div>
+
+</section>
+
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
 @endsection

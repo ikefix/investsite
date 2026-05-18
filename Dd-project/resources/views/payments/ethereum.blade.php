@@ -1,6 +1,5 @@
 @extends('layouts.app')
 
-
              <link rel="stylesheet" href="{{ asset('resources/css/app.css') }}">
 
 @section('content')
@@ -76,28 +75,26 @@
         background: #b71c1c;
     }
 </style>
+    <div class="payment-container">
+        <h1>Selected Plan: {{ $plan ?? 'No Plan Selected' }}</h1>
+        <h2>Payment Method: Ethereum</h2>
+        <div class="payment-details"> 
+            <p>Send your payment to the Bitcoin wallet address below:</p>
+            <p><strong>Ethereum Address:</strong> 0x1bD5FDEA71213CC5B9962F54de3E119A435A57C0</p>
+        </div>
 
-<div class="payment-container">
-    <h1>Selected Plan: {{ $plan ?? 'No Plan Selected' }}</h1>
-    <h2>Payment Method: Bitcoin</h2>
+        <div class="upload-section">
+            <h3>Upload Proof of Payment</h3>
+            <form action="{{ route('payment.proof') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <input type="hidden" name="plan" value="{{ $plan }}">
+                <input type="hidden" name="payment_method" value="bitcoin">
 
-    <div class="payment-details">
-        <p>Send your payment to the Bitcoin wallet address below:</p>
-        <p><strong>Bitcoin Address:</strong> bc1qyg48uju7hmnds8c4qh679ug6dmlgmasddf02uw</p>
+                <label for="proof">Upload Proof (screenshot or receipt):</label>
+                <input type="file" name="proof" id="proof" required accept="image/*,application/pdf">
+                
+                <button class="submit-btn" type="submit">Submit</button>
+            </form>
+        </div>
     </div>
-
-    <div class="upload-section">
-        <h3>Upload Proof of Payment</h3>
-        <form action="{{ route('payment.proof') }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            <input type="hidden" name="plan" value="{{ $plan }}">
-            <input type="hidden" name="payment_method" value="bitcoin">
-
-            <label for="proof">Upload Proof (screenshot or receipt):</label>
-            <input type="file" name="proof" id="proof" required accept="image/*,application/pdf">
-            
-            <button type="submit" class="submit-btn">Submit</button>
-        </form>
-    </div>
-</div>
 @endsection

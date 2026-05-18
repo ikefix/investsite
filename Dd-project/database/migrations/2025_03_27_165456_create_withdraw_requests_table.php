@@ -7,20 +7,21 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up()
     {
-        Schema::create('payment_proofs', function (Blueprint $table) {
+        Schema::create('withdraw_requests', function (Blueprint $table) {
             $table->id();
-            $table->string('plan');
-            $table->string('payment_method');
+            $table->unsignedBigInteger('user_id');
+            $table->string('wallet_address');
+            $table->decimal('amount', 10, 2);
             $table->string('status')->default('pending');
-            $table->string('file_path');
-            $table->boolean('is_seen')->default(false); // Admin notification flag
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('payment_proofs');
+        Schema::dropIfExists('withdraw_requests');
     }
 };
 

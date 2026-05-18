@@ -1,64 +1,69 @@
 <?php
+
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+
 use App\Http\Controllers\CryptoController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\PaymentPlanController;
+use App\Http\Controllers\WithdrawRequestController;
 use App\Http\Controllers\PaymentProofController;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\DepositController;
+use App\Http\Controllers\UserBalanceController;
+use App\Http\Controllers\DepositBalanceController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+// 🌍 Public Routes
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', [CryptoController::class, 'getMarketTrendy']);
+
+Auth::routes(['verify' => true]);
+
+// 🧑‍💼 Authenticated User Routes
+Route::middleware(['auth'])->group(function () {
+    Route::post('/withdraw', [WithdrawRequestController::class, 'store'])->name('wallet.store');
 });
 
-Auth::routes();
+// ✅ Admin Panel Routes
+Route::middleware(['auth', 'isAdmin'])->prefix('admin')->group(function () {
+    Route::get('/index', [AdminController::class, 'index'])->name('admin.index');
+    Route::get('/users', [AdminController::class, 'users'])->name('admin.users');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::view('/invest', 'dashboardLinks.terms');
+    Route::get('/withdrawals', [AdminController::class, 'withdrawals'])->name('admin.withdrawals');
+    Route::get('/withdrawals/update/{id}/{action}', [AdminController::class, 'updateWithdrawal'])->name('admin.withdrawal.update');
+
+    Route::get('/notifications', [PaymentProofController::class, 'index'])->name('admin.notifications');
+    Route::put('/confirm-proof/{id}', [AdminController::class, 'confirmProof'])->name('admin.confirm-proof');
+
+    Route::get('/balance', [UserBalanceController::class, 'index'])->name('admin.balance');
+    Route::post('/balance/update/{id}', [UserBalanceController::class, 'update'])->name('admin.balance.update');
+
+    Route::get('/deposit-balance', [DepositBalanceController::class, 'index'])->name('admin.deposit_balances');
+    Route::put('/deposit-balance/update/{userId}', [DepositBalanceController::class, 'update'])->name('admin.update-user-balance');
+
+    Route::get('/settings', [AdminController::class, 'settings'])->name('admin.settings');
+    Route::post('/settings', [AdminController::class, 'updateSettings'])->name('admin.updateSettings');
+});
+
+// 💵 Deposits
+Route::post('/deposit/store', [DepositController::class, 'store'])->name('deposit.store');
+Route::get('/admin/deposits', [DepositController::class, 'index'])->middleware(['auth', 'isAdmin'])->name('admin.deposits');
+Route::put('/admin/deposits/confirm/{id}', [DepositController::class, 'confirmDeposit'])->middleware(['auth', 'isAdmin'])->name('admin.confirm-deposit');
+
+// 🌐 Static Pages
 Route::view('/plans', 'dashboardLinks.payment');
 Route::view('/withdraw', 'dashboardLinks.wallet');
 Route::view('/terms', 'dashboardLinks.terms');
 Route::view('/deposit', 'dashboardLinks.deposit');
+Route::view('/invest', 'dashboardLinks.invest');
 
-
-Route::get('/payment/{method}', [PaymentPlanController::class, 'showPaymentPage']);
-Route::post('/payment-proof', [PaymentProofController::class, 'store'])->name('payment.proof');
-
-
-
-Route::put('/admin/confirm-proof/{id}', [AdminController::class, 'confirmProof'])->name('admin.confirm-proof');
-
-
-// Admin Routes
-Route::prefix('admin')->middleware('auth', 'isAdmin')->group( function() {
-    Route::get('/index', [AdminController::class, 'index']);
-    Route::get('/users', [AdminController::class, 'users']);
-    // Route::get('/profile', [AdminController::class, 'profile']);
-    // Route::put('/profile', [AdminController::class, 'update_profile']);
-    // Route::put('/password', [AdminController::class, 'update_password']);
-    // Route::get('/settings', [AdminController::class, 'get_settings']);
-    // Route::post('/settings', [AdminController::class, 'update_settings']);
-    // Route::post('/add_help', [AdminController::class, 'add_help']);
-    // Route::delete('/delete_help', [AdminController::class, 'delete_help']);
-    // Route::get('/transactions', [AdminController::class, 'get_transactions']);
-    // Route::delete('/user-delete/{user_id}', [AdminController::class, 'user_delete']);
-    // Route::get('/api_manegement', [AdminController::class, 'api_manegement']);
-    // Route::delete('/help-delete/{help_id}', [AdminController::class, 'help_delete']);
-});
-
-
+// 📈 Crypto Home Page
 Route::get('/home', [CryptoController::class, 'getMarketTrends'])->name('home');
 
+// 📤 Payment Proof
+Route::post('/payment-proof', [PaymentProofController::class, 'store'])->name('payment.proof');
 
+// 💳 Dynamic Payment Method Route
+Route::get('/payment/{method}', [App\Http\Controllers\PaymentPlanController::class, 'showPaymentPage'])->name('payment.page');
 
 

@@ -1,47 +1,97 @@
+<?php 
+$settings = \App\Models\Setting::pluck('value', 'key');
+?>
+
 @extends('layouts.admin_app')
-@vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/css/app.css'])
+<link rel="stylesheet" href="{{ asset('resources/css/app.css') }}">
+
 @section('admin_content')
 
-@foreach($paymentProofs as $proof)
-    <div>
-        <p>Plan: {{ $proof->plan }}</p>
-        <p>Payment Method: {{ $proof->payment_method }}</p>
-        <p>Status: 
-            <span style="color: {{ $proof->status === 'confirmed' ? 'green' : 'red' }};">
-                {{ ucfirst($proof->status) }}
-            </span>
-        </p>
+<h1>Update Website Content</h1>
 
-        {{-- Display proof image --}}
-        @if($proof->file_path)
-            <img src="{{ asset('storage/' . $proof->file_path) }}" alt="Payment Proof" width="200">
-        @else
-            <p>No proof uploaded</p>
-        @endif
+@if(session('success'))
+    <div class="alert alert-success">{{ session('success') }}</div>
+@endif
 
-        {{-- Confirmation button --}}
-        @if($proof->status !== 'confirmed')
-            <form action="{{ route('admin.confirm-proof', $proof->id) }}" method="POST">
-                @csrf
-                @method('PUT')  <!-- This ensures the request is treated as PUT -->
-                <button type="submit" class="btn btn-success">Confirm Payment</button>
-            </form>
-        @endif
+<form action="{{ route('admin.updateSettings') }}" method="POST" enctype="multipart/form-data" class="settings-form">
+    @csrf
+
+    <h2>General Settings</h2>
+    <div class="form-group">
+        <label>Website Name:</label>
+        <input type="text" name="site_name" class="form-control" value="{{ $settings['site_name'] ?? '' }}" required>
     </div>
-@endforeach
 
+    <h2>Hero Section</h2>
+    <div class="form-group">
+        <label>Hero Heading:</label>
+        <input type="text" name="hero_heading" class="form-control" value="{{ $settings['hero_heading'] ?? '' }}" required>
+    </div>
 
+    <div class="form-group">
+        <label>Hero Text:</label>
+        <textarea name="hero_text" class="form-control" required>{{ $settings['hero_text'] ?? '' }}</textarea>
+    </div>
 
-<script src="https://js.pusher.com/7.0/pusher.min.js"></script>
-<script>
-    var pusher = new Pusher('YOUR_PUSHER_KEY', {
-        cluster: 'YOUR_CLUSTER'
-    });
+    <h2>Website Logo</h2>
+    <div class="form-group">
+        <label>Upload New Logo:</label>
+        <input type="file" name="site_logo" class="form-control">
+        <p>Current Logo:</p>
+        <img src="{{ asset('storage/' . ($settings['site_logo'] ?? 'default-logo.png')) }}" width="100">
+    </div>
 
-    var channel = pusher.subscribe('admin-notifications');
-    channel.bind('App\\Events\\NewPaymentProofUploaded', function(data) {
-        alert('New payment proof uploaded for: ' + data.paymentProof.plan);
-        location.reload();
-    });
-</script>
+    <h2>How to Join</h2>
+    <div class="form-group">
+        <label>Title:</label>
+        <input type="text" name="how_to_join_title" class="form-control" value="{{ $settings['how_to_join_title'] ?? '' }}">
+    </div>
+    <div class="form-group">
+        <label>Subtitle:</label>
+        <input type="text" name="how_to_join_subtitle" class="form-control" value="{{ $settings['how_to_join_subtitle'] ?? '' }}">
+    </div>
+
+    <h2>Register Section</h2>
+    <div class="form-group">
+        <label>Title:</label>
+        <input type="text" name="register_title" class="form-control" value="{{ $settings['register_title'] ?? '' }}">
+    </div>
+    <div class="form-group">
+        <label>Text:</label>
+        <textarea name="register_text" class="form-control">{{ $settings['register_text'] ?? '' }}</textarea>
+    </div>
+
+    <h2>Choose Plan</h2>
+    <div class="form-group">
+        <label>Title:</label>
+        <input type="text" name="choose_plan_title" class="form-control" value="{{ $settings['choose_plan_title'] ?? '' }}">
+    </div>
+    <div class="form-group">
+        <label>Text:</label>
+        <textarea name="choose_plan_text" class="form-control">{{ $settings['choose_plan_text'] ?? '' }}</textarea>
+    </div>
+
+    <h2>Earn Rewards</h2>
+    <div class="form-group">
+        <label>Title:</label>
+        <input type="text" name="earn_rewards_title" class="form-control" value="{{ $settings['earn_rewards_title'] ?? '' }}">
+    </div>
+    <div class="form-group">
+        <label>Text:</label>
+        <textarea name="earn_rewards_text" class="form-control">{{ $settings['earn_rewards_text'] ?? '' }}</textarea>
+    </div>
+
+    <h2>About Section</h2>
+    <div class="form-group">
+        <label>Title:</label>
+        <input type="text" name="about_title" class="form-control" value="{{ $settings['about_title'] ?? '' }}">
+    </div>
+    <div class="form-group">
+        <label>Text:</label>
+        <textarea name="about_text" class="form-control">{{ $settings['about_text'] ?? '' }}</textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+</form>
+
 @endsection

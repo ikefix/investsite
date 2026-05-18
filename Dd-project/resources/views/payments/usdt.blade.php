@@ -79,11 +79,11 @@
 
 <div class="payment-container">
     <h1>Selected Plan: {{ $plan ?? 'No Plan Selected' }}</h1>
-    <h2>Payment Method: Bitcoin</h2>
+    <h2>Payment Method: USDT</h2>
 
     <div class="payment-details">
         <p>Send your payment to the Bitcoin wallet address below:</p>
-        <p><strong>Bitcoin Address:</strong> bc1qyg48uju7hmnds8c4qh679ug6dmlgmasddf02uw</p>
+        <p><strong>USDT Address:</strong> TPx7hqrfjoGTsae7tZBwQL659wf4FcKC8X</p>
     </div>
 
     <div class="upload-section">

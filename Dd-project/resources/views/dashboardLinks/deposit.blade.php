@@ -1,169 +1,114 @@
 @extends('layouts.app')
-@vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/css/app.css'])
+<link rel="stylesheet" href="{{ asset('resources/css/app.css') }}">
+
 @section('content')
-<style>
-    .plans-container {
-        max-width: 900px;
-        margin: 20px auto;
-        padding: 20px;
-        background: #f9f9f9;
-        border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        font-family: Arial, sans-serif;
-        color: #333;
-    }
 
-    .plans-container h2 {
-        text-align: center;
-        color: #d32f2f;
-        font-size: 24px;
-        margin-bottom: 15px;
-    }
+<div class="deposit-body">
+    <div class="crypto-image">
+        <img src="https://images.unsplash.com/photo-1518546305927-5a555bb7020d?q=80&w=1200&auto=format&fit=crop" alt="Crypto Investment">
+    </div>
+    
+    <div class="deposit-form">
+        <h2>Make a Deposit</h2>
+    
+        <form id="depositForm" method="POST" action="{{ url('/deposit/store') }}" enctype="multipart/form-data">
+            @csrf
+    
+            <!-- Select Plan -->
+            {{-- <label for="plan">Select Investment Plan:</label>
+            <select name="plan" id="plan" required>
+                <option value="">-- Choose a Plan --</option>
+                @foreach($plans as $plan)
+                    <option value="{{ $plan['name'] }}">{{ $plan['name'] }} ({{ $plan['profit'] }})</option>
+                @endforeach
+            </select> --}}
+    
+            <!-- Select Payment Method -->
+            <label for="payment_method">Select Payment Method:</label>
+            <select name="payment_method" id="payment_method" required>
+                <option value="">-- Choose Payment Method --</option>
+                <option value="btc">Bitcoin (BTC)</option>
+                <option value="eth">Ethereum (ETH)</option>
+                <option value="usdt">USDT (TRC20)</option>
+            </select> <br>
+    
+            <!-- Wallet Address -->
+            <div class="wallet-info">
+                <p><strong>Send Payment to:</strong></p>
+                <p id="wallet_address"></p>
+                {{-- <p><strong>QR Code:</strong></p>
+                <img id="wallet_qr" src="" alt="QR Code" width="150"> --}}
+            </div><br>
+    
+            <!-- Enter Deposit Amount -->
+            {{-- <label for="amount">Enter Deposit Amount ($):</label>
+            <input type="number" name="amount" id="amount" min="50" required> --}}
+    
+            <!-- Upload Proof of Payment -->
+            <label for="proof">Upload Payment Proof:</label>
+            <input type="file" name="proof" id="proof" accept="image/*,application/pdf" required>
 
-    .plan {
-        background: white;
-        padding: 15px;
-        margin: 15px 0;
-        border-left: 5px solid #d32f2f;
-        border-radius: 5px;
-        box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
-    }
-
-    .plan h3 {
-        color: #d32f2f;
-        font-size: 20px;
-        margin-bottom: 10px;
-    }
-
-    .plan ul {
-        list-style-type: none;
-        padding: 0;
-    }
-
-    .plan ul li {
-        padding: 5px 0;
-        font-size: 16px;
-    }
-
-    .highlight {
-        font-weight: bold;
-        color: #d32f2f;
-    }
-</style>
+            <!-- New Input: Wallet Address for Proof -->
+            <label for="wallet_proof">Wallet Address (Proof of Payment):</label>
+            <input type="text" name="wallet_proof" id="wallet_proof" required placeholder="Enter sender wallet address">
+    
+            <!-- Submit -->
+            <button type="submit" class="submit-btn">Submit Deposit</button>
+        </form>
+    </div>
+</div>
 
 <div class="plans-container">
     <h2>Investment Plans</h2>
 
-    <div class="plan">
-        <h3>PROMO PLAN</h3>
-        <ul>
-            <li><span class="highlight">30% daily</span> for 5 days</li>
-            <li>Min: $500 | Max: $4999</li>
-            <li>Referral Commission: 10%</li>
-            <li>Duration: 5 days</li>
-            <li>Profit Withdraw: Yes</li>
-            <li>Btc: bc1qyg48uju7hmnds8c4qh679ug6dmlgmasddf02uw</li>
-            <li>Eth: 0x1bD5FDEA71213CC5B9962F54de3E119A435A57C0</li>
-            <li>USDT: TPx7hqrfjoGTsae7tZBwQL659wf4FcKC8X</li>
-        </ul>
-    </div>
+    @php
+        $plans = [
+            ['name' => 'PROMO PLAN', 'profit' => '30% daily', 'duration' => '5 days', 'min' => 500, 'max' => 4999],
+            ['name' => 'GOLDEN PROMO PLAN', 'profit' => '38% daily', 'duration' => '12 days', 'min' => 5000, 'max' => 'No Limit'],
+            ['name' => 'STARTER PLAN', 'profit' => '5% after 24 hours', 'duration' => '24 hours', 'min' => 50, 'max' => 299],
+            ['name' => 'BRONZE PLAN', 'profit' => '10% daily', 'duration' => '48 hours', 'min' => 300, 'max' => 499],
+            ['name' => 'GOLD PLAN', 'profit' => '15% daily', 'duration' => '4 days', 'min' => 500, 'max' => 999],
+            ['name' => 'FAMILY JOINT ACCOUNT', 'profit' => '50% daily', 'duration' => '60 days', 'min' => 7000, 'max' => 'Unlimited'],
+            ['name' => 'DIAMOND PLAN', 'profit' => '20% daily', 'duration' => '7 days', 'min' => 1000, 'max' => 4999],
+            ['name' => 'PLATINUM PLAN', 'profit' => '25% daily', 'duration' => '12 days', 'min' => 5000, 'max' => 'No Limit'],
+        ];
+    @endphp
 
-    <div class="plan">
-        <h3>GOLDEN PROMO PLAN</h3>
+    @foreach($plans as $plan)
+    <div class="deposit-plan">
+        <h3>{{ $plan['name'] }}</h3>
         <ul>
-            <li><span class="highlight">38% daily</span> for 12 days</li>
-            <li>Min: $5000 | Max: No limit</li>
+            <li><span class="highlight">{{ $plan['profit'] }}</span> for {{ $plan['duration'] }}</li>
+            <li>Min: ${{ $plan['min'] }} | Max: {{ $plan['max'] }}</li>
             <li>Referral Commission: 10%</li>
-            <li>Duration: 12 days</li>
             <li>Profit Withdraw: Yes</li>
-            <li>Btc: bc1qyg48uju7hmnds8c4qh679ug6dmlgmasddf02uw</li>
-            <li>Eth: 0x1bD5FDEA71213CC5B9962F54de3E119A435A57C0</li>
-            <li>USDT: TPx7hqrfjoGTsae7tZBwQL659wf4FcKC8X</li>
         </ul>
     </div>
-
-    <div class="plan">
-        <h3>STARTER PLAN</h3>
-        <ul>
-            <li><span class="highlight">5% after 24 hours</span></li>
-            <li>Min: $50 | Max: $299</li>
-            <li>Referral Commission: 10%</li>
-            <li>Duration: 24 hours</li>
-            <li>Profit Withdraw: Yes</li>
-            <li>Btc: bc1qyg48uju7hmnds8c4qh679ug6dmlgmasddf02uw</li>
-            <li>Eth: 0x1bD5FDEA71213CC5B9962F54de3E119A435A57C0</li>
-            <li>USDT: TPx7hqrfjoGTsae7tZBwQL659wf4FcKC8X</li>
-        </ul>
-    </div>
-
-    <div class="plan">
-        <h3>BRONZE PLAN</h3>
-        <ul>
-            <li><span class="highlight">10% daily</span> for 48 hours</li>
-            <li>Min: $300 | Max: $499</li>
-            <li>Referral Commission: 10%</li>
-            <li>Duration: 48 hours</li>
-            <li>Profit Withdraw: Yes</li>
-            <li>Btc: bc1qyg48uju7hmnds8c4qh679ug6dmlgmasddf02uw</li>
-            <li>Eth: 0x1bD5FDEA71213CC5B9962F54de3E119A435A57C0</li>
-            <li>USDT: TPx7hqrfjoGTsae7tZBwQL659wf4FcKC8X</li>
-        </ul>
-    </div>
-
-    <div class="plan">
-        <h3>GOLD PLAN</h3>
-        <ul>
-            <li><span class="highlight">15% daily</span> for 4 days</li>
-            <li>Min: $500 | Max: $999</li>
-            <li>Referral Commission: 10%</li>
-            <li>Duration: 4 days</li>
-            <li>Profit Withdraw: Yes</li>
-            <li>Btc: bc1qyg48uju7hmnds8c4qh679ug6dmlgmasddf02uw</li>
-            <li>Eth: 0x1bD5FDEA71213CC5B9962F54de3E119A435A57C0</li>
-            <li>USDT: TPx7hqrfjoGTsae7tZBwQL659wf4FcKC8X</li>
-        </ul>
-    </div>
-
-    <div class="plan">
-        <h3>FAMILY JOINT ACCOUNT</h3>
-        <ul>
-            <li><span class="highlight">50% daily</span> for 2 months (60 days)</li>
-            <li>Min: $7000 | Max: Unlimited</li>
-            <li>Referral Commission: 10%</li>
-            <li>Duration: 60 days</li>
-            <li>Profit Withdraw: Yes</li>
-            <li>Btc: bc1qyg48uju7hmnds8c4qh679ug6dmlgmasddf02uw</li>
-            <li>Eth: 0x1bD5FDEA71213CC5B9962F54de3E119A435A57C0</li>
-            <li>USDT: TPx7hqrfjoGTsae7tZBwQL659wf4FcKC8X</li>
-        </ul>
-    </div>
-
-    <div class="plan">
-        <h3>DIAMOND PLAN</h3>
-        <ul>
-            <li><span class="highlight">20% daily</span> for 7 days</li>
-            <li>Min: $1000 | Max: $4999</li>
-            <li>Referral Commission: 10%</li>
-            <li>Duration: 7 days</li>
-            <li>Profit Withdraw: Yes</li>
-            <li>Btc: bc1qyg48uju7hmnds8c4qh679ug6dmlgmasddf02uw</li>
-            <li>Eth: 0x1bD5FDEA71213CC5B9962F54de3E119A435A57C0</li>
-            <li>USDT: TPx7hqrfjoGTsae7tZBwQL659wf4FcKC8X</li>
-        </ul>
-    </div>
-
-    <div class="plan">
-        <h3>PLATINUM PLAN</h3>
-        <ul>
-            <li><span class="highlight">25% daily</span> for 12 days</li>
-            <li>Min: $5000 | Max: No limit</li>
-            <li>Referral Commission: 10%</li>
-            <li>Duration: 12 days</li>
-            <li>Profit Withdraw: Yes</li>
-            <li>Btc: bc1qyg48uju7hmnds8c4qh679ug6dmlgmasddf02uw</li>
-            <li>Eth: 0x1bD5FDEA71213CC5B9962F54de3E119A435A57C0</li>
-            <li>USDT: TPx7hqrfjoGTsae7tZBwQL659wf4FcKC8X</li>
-        </ul>
-    </div>
+    @endforeach
 </div>
+
+
+<script>
+    document.getElementById('payment_method').addEventListener('change', function() {
+        let wallets = {
+            btc: "bc1qyg48uju7hmnds8c4qh679ug6dmlgmasddf02uw",
+            eth: "0x1bD5FDEA71213CC5B9962F54de3E119A435A57C0",
+            usdt: "TPx7hqrfjoGTsae7tZBwQL659wf4FcKC8X"
+        };
+
+        let method = this.value;
+        document.getElementById('wallet_address').innerText = wallets[method] || "";
+        document.getElementById('wallet_qr').src = `https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=${wallets[method] || ""}`;
+    });
+
+    document.getElementById('depositForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevents the default submission
+        
+        // Display success message
+        alert("You have successfully submitted your deposit request.");
+
+        // Allow form submission after alert
+        this.submit();
+    });
+</script>
 @endsection

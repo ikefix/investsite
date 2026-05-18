@@ -1,86 +1,190 @@
 @extends('layouts.app')
 
-@vite(['resources/css/app.css'])
+<link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
 @section('content')
 
+<section class="auth-section">
 
-@vite(['resources/css/app.css'])
+    <div class="auth-container">
 
-<div class="container regel">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+        <!-- LEFT SIDE -->
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
-                        @csrf
+        <div class="auth-left">
 
-                        <div class="row mb-3">
-                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
+            <span class="auth-tag">
+                Create Account
+            </span>
 
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+            <h1>
+                Start Your <br>
+                Investment Journey
+            </h1>
 
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+            <p>
+                Join thousands of investors trading global
+                markets securely with our modern investment platform.
+            </p>
 
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+            <div class="auth-features">
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
-                                {{-- <div class="log-span">
-                                    <span>Already have an account </span><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </div> --}}
-                            </div>
-                        </div>
-                    </form>
+                <div class="auth-feature">
+                    <i class='bx bx-check-circle'></i>
+                    <span>Secure Trading Platform</span>
                 </div>
+
+                <div class="auth-feature">
+                    <i class='bx bx-check-circle'></i>
+                    <span>Instant Deposits & Withdrawals</span>
+                </div>
+
+                <div class="auth-feature">
+                    <i class='bx bx-check-circle'></i>
+                    <span>24/7 Customer Support</span>
+                </div>
+
             </div>
+
         </div>
+
+        <!-- RIGHT SIDE -->
+
+        <div class="auth-right">
+
+            <div class="auth-card">
+
+                <h2>
+                    Register Account
+                </h2>
+
+                <form method="POST" action="{{ route('register') }}">
+
+                    @csrf
+
+                    <!-- NAME -->
+
+                    <div class="input-group-auth">
+
+                        <label>Name</label>
+
+                        <input
+                            id="name"
+                            type="text"
+                            class="@error('name') is-invalid @enderror"
+                            name="name"
+                            value="{{ old('name') }}"
+                            required
+                            autocomplete="name"
+                            autofocus
+                            placeholder="Enter your full name"
+                        >
+
+                        @error('name')
+                            <span class="error-text">
+                                {{ $message }}
+                            </span>
+                        @enderror
+
+                    </div>
+
+                    <!-- EMAIL -->
+
+                    <div class="input-group-auth">
+
+                        <label>Email Address</label>
+
+                        <input
+                            id="email"
+                            type="email"
+                            class="@error('email') is-invalid @enderror"
+                            name="email"
+                            value="{{ old('email') }}"
+                            required
+                            autocomplete="email"
+                            placeholder="Enter your email"
+                        >
+
+                        @error('email')
+                            <span class="error-text">
+                                {{ $message }}
+                            </span>
+                        @enderror
+
+                    </div>
+
+                    <!-- PASSWORD -->
+
+                    <div class="input-group-auth">
+
+                        <label>Password</label>
+
+                        <input
+                            id="password"
+                            type="password"
+                            class="@error('password') is-invalid @enderror"
+                            name="password"
+                            required
+                            autocomplete="new-password"
+                            placeholder="Create password"
+                        >
+
+                        @error('password')
+                            <span class="error-text">
+                                {{ $message }}
+                            </span>
+                        @enderror
+
+                    </div>
+
+                    <!-- CONFIRM -->
+
+                    <div class="input-group-auth">
+
+                        <label>Confirm Password</label>
+
+                        <input
+                            id="password-confirm"
+                            type="password"
+                            name="password_confirmation"
+                            required
+                            autocomplete="new-password"
+                            placeholder="Confirm password"
+                        >
+
+                    </div>
+
+                    <!-- BUTTON -->
+
+                    <button type="submit" class="auth-btn">
+
+                        Create Account
+
+                    </button>
+
+                    <!-- LOGIN -->
+
+                    <div class="auth-bottom">
+
+                        <span>
+                            Already have an account?
+                        </span>
+
+                        <a href="{{ route('login') }}">
+                            Login
+                        </a>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
     </div>
-</div>
+
+</section>
+
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
 @endsection
