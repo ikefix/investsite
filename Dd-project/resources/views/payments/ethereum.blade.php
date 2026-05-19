@@ -80,7 +80,7 @@
         <h2>Payment Method: Ethereum</h2>
         <div class="payment-details"> 
             <p>Send your payment to the Bitcoin wallet address below:</p>
-            <p><strong>Ethereum Address:</strong> 0x1bD5FDEA71213CC5B9962F54de3E119A435A57C0</p>
+            <p><strong>Ethereum Address:</strong> {{ $settings['how_to_join_title']}}</p>
         </div>
 
         <div class="upload-section">

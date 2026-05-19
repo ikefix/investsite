@@ -33,6 +33,73 @@ window.smartsupp||(function(d) {
 <noscript>Powered by <a href="https://www.smartsupp.com" target="_blank">Smartsupp</a></noscript>
 
 </head>
+
+<style>
+    .dropdown{
+    position:relative;
+}
+
+.dropdown-toggle{
+    display:flex;
+    align-items:center;
+    gap:5px;
+}
+
+.dropdown-menu-custom{
+    position:absolute;
+    top:120%;
+    left:0;
+
+    min-width:220px;
+
+    background:white;
+
+    border-radius:14px;
+
+    padding:10px 0;
+
+    box-shadow:0 15px 40px rgba(0,0,0,0.08);
+
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(10px);
+
+    transition:.3s ease;
+
+    z-index:999;
+}
+
+.dropdown-menu-custom li{
+    list-style:none;
+}
+
+.dropdown-menu-custom li a{
+    display:block;
+
+    padding:12px 18px;
+
+    color:#111827;
+    text-decoration:none;
+
+    font-size:14px;
+    font-weight:500;
+
+    transition:.2s;
+}
+
+.dropdown-menu-custom li a:hover{
+    background:#f9fafb;
+    color:#7c3aed;
+    padding-left:24px;
+}
+
+.dropdown:hover .dropdown-menu-custom{
+    opacity:1;
+    visibility:visible;
+    transform:translateY(0);
+}
+</style>
+
 <body>
 
 <!-- NAVBAR -->
@@ -60,7 +127,25 @@ window.smartsupp||(function(d) {
         <li><a href="#market">Markets</a></li>
         <li><a href="#plans">Plans</a></li>
         <li><a href="#offer">Offers</a></li>
-        <li><a href="#features">Features</a></li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle">
+                Features <i class='bx bx-chevron-down'></i>
+            </a>
+
+            <ul class="dropdown-menu-custom">
+                <li>
+                    <a href="/features/pos">POS Features</a>
+                </li>
+
+                <li>
+                    <a href="/features/inventory">Inventory Management</a>
+                </li>
+
+                <li>
+                    <a href="/features/reports">Reports & Analytics</a>
+                </li>
+            </ul>
+        </li>
 
         <!-- MOBILE BUTTONS -->
 

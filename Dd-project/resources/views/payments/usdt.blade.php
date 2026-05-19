@@ -83,7 +83,7 @@
 
     <div class="payment-details">
         <p>Send your payment to the Bitcoin wallet address below:</p>
-        <p><strong>USDT Address:</strong> TPx7hqrfjoGTsae7tZBwQL659wf4FcKC8X</p>
+        <p><strong>USDT Address:</strong> {{ $settings['register_title']}}</p>
     </div>
 
     <div class="upload-section">

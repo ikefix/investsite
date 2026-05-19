@@ -29,7 +29,7 @@ $settings = \App\Models\Setting::pluck('value', 'key');
     </div>
 
     <div class="form-group">
-        <label>Hero Text:</label>
+        <label>Bitcoin Address</label>
         <textarea name="hero_text" class="form-control" required>{{ $settings['hero_text'] ?? '' }}</textarea>
     </div>
 
@@ -41,7 +41,7 @@ $settings = \App\Models\Setting::pluck('value', 'key');
         <img src="{{ asset('storage/' . ($settings['site_logo'] ?? 'default-logo.png')) }}" width="100">
     </div>
 
-    <h2>How to Join</h2>
+    <h2>ethernuem Address/h2>
     <div class="form-group">
         <label>Title:</label>
         <input type="text" name="how_to_join_title" class="form-control" value="{{ $settings['how_to_join_title'] ?? '' }}">
@@ -51,7 +51,7 @@ $settings = \App\Models\Setting::pluck('value', 'key');
         <input type="text" name="how_to_join_subtitle" class="form-control" value="{{ $settings['how_to_join_subtitle'] ?? '' }}">
     </div>
 
-    <h2>Register Section</h2>
+    <h2>Usdt Address</h2>
     <div class="form-group">
         <label>Title:</label>
         <input type="text" name="register_title" class="form-control" value="{{ $settings['register_title'] ?? '' }}">
