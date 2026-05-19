@@ -212,7 +212,7 @@
         <button class="navbar-toggler"
                 type="button"
                 data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent">
+                data-bs-target="#navbarSupportedContent" style="margin-left:0;">
 
             <span class="navbar-toggler-icon"></span>
 
@@ -303,12 +303,6 @@
 
                 @endguest
 
-            </ul>
-
-            <!-- RIGHT -->
-
-            <ul class="navbar-nav ms-auto align-items-center nav-buttons">
-
                 @guest
 
                     <!-- LOGIN -->
@@ -394,6 +388,14 @@
                 @endguest
 
             </ul>
+
+            <!-- RIGHT -->
+
+            <!-- <ul class="navbar-nav ms-auto align-items-center nav-buttons">
+
+                
+
+            </ul> -->
 
         </div>
 

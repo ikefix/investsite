@@ -919,7 +919,7 @@ $settings = \App\Models\Setting::pluck('value', 'key');
     <div class="footer-top">
 
         <div class="footer-logo">
-            <h2>InvestPro</h2>
+            <h2>VartexTrade</h2>
             <p>Modern stock investment platform.</p>
         </div>
 
@@ -952,7 +952,7 @@ $settings = \App\Models\Setting::pluck('value', 'key');
     </div>
 
     <div class="footer-bottom">
-        © 2026 InvestPro. All Rights Reserved.
+        © 2026 VartexTrade. All Rights Reserved.
     </div>
 
 </footer>
