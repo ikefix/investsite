@@ -102,6 +102,92 @@ window.smartsupp||(function(d) {
 
 </header>
 
+</section>
+
+
+<!-- ========================= -->
+<!-- LIVE MARKET TICKER -->
+<!-- ========================= -->
+
+<section class="ticker-section" id="market">
+
+    <div class="ticker-wrapper">
+
+        <div class="ticker-track">
+
+            <!-- FIRST LOOP -->
+
+            @foreach($data as $coin)
+
+                <div class="ticker-item">
+
+                    <img src="{{ $coin['image'] }}" alt="">
+
+                    <div class="ticker-info">
+
+                        <h4>
+                            {{ strtoupper($coin['symbol']) }}/USD
+                        </h4>
+
+                        <p>
+                            ${{ number_format($coin['current_price'], 2) }}
+                        </p>
+
+                    </div>
+
+                    <span class="
+                        {{ $coin['price_change_percentage_24h'] >= 0
+                        ? 'positive'
+                        : 'negative' }}
+                    ">
+
+                        {{ number_format($coin['price_change_percentage_24h'], 2) }}%
+
+                    </span>
+
+                </div>
+
+            @endforeach
+
+            <!-- DUPLICATE FOR INFINITE SLIDE -->
+
+            @foreach($data as $coin)
+
+                <div class="ticker-item">
+
+                    <img src="{{ $coin['image'] }}" alt="">
+
+                    <div class="ticker-info">
+
+                        <h4>
+                            {{ strtoupper($coin['symbol']) }}/USD
+                        </h4>
+
+                        <p>
+                            ${{ number_format($coin['current_price'], 2) }}
+                        </p>
+
+                    </div>
+
+                    <span class="
+                        {{ $coin['price_change_percentage_24h'] >= 0
+                        ? 'positive'
+                        : 'negative' }}
+                    ">
+
+                        {{ number_format($coin['price_change_percentage_24h'], 2) }}%
+
+                    </span>
+
+                </div>
+
+            @endforeach
+
+        </div>
+
+    </div>
+
+</section>
 
 <!-- HERO -->
 
@@ -315,92 +401,6 @@ window.smartsupp||(function(d) {
 
     </p>
 
-</section>
-
-
-<!-- ========================= -->
-<!-- LIVE MARKET TICKER -->
-<!-- ========================= -->
-
-<section class="ticker-section" id="market">
-
-    <div class="ticker-wrapper">
-
-        <div class="ticker-track">
-
-            <!-- FIRST LOOP -->
-
-            @foreach($data as $coin)
-
-                <div class="ticker-item">
-
-                    <img src="{{ $coin['image'] }}" alt="">
-
-                    <div class="ticker-info">
-
-                        <h4>
-                            {{ strtoupper($coin['symbol']) }}/USD
-                        </h4>
-
-                        <p>
-                            ${{ number_format($coin['current_price'], 2) }}
-                        </p>
-
-                    </div>
-
-                    <span class="
-                        {{ $coin['price_change_percentage_24h'] >= 0
-                        ? 'positive'
-                        : 'negative' }}
-                    ">
-
-                        {{ number_format($coin['price_change_percentage_24h'], 2) }}%
-
-                    </span>
-
-                </div>
-
-            @endforeach
-
-            <!-- DUPLICATE FOR INFINITE SLIDE -->
-
-            @foreach($data as $coin)
-
-                <div class="ticker-item">
-
-                    <img src="{{ $coin['image'] }}" alt="">
-
-                    <div class="ticker-info">
-
-                        <h4>
-                            {{ strtoupper($coin['symbol']) }}/USD
-                        </h4>
-
-                        <p>
-                            ${{ number_format($coin['current_price'], 2) }}
-                        </p>
-
-                    </div>
-
-                    <span class="
-                        {{ $coin['price_change_percentage_24h'] >= 0
-                        ? 'positive'
-                        : 'negative' }}
-                    ">
-
-                        {{ number_format($coin['price_change_percentage_24h'], 2) }}%
-
-                    </span>
-
-                </div>
-
-            @endforeach
-
-        </div>
-
-    </div>
-
-</section>
 
 <!-- ========================= -->
 <!-- FOREX HERO SECTION -->
