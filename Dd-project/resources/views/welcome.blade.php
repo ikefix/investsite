@@ -128,11 +128,11 @@ window.smartsupp||(function(d) {
         <li><a href="#plans">Plans</a></li>
         <li><a href="#offer">Offers</a></li>
         <li class="dropdown">
-            <a href="#" class="dropdown-toggle">
+            <!-- <a href="#" class="dropdown-toggle">
                 Features <i class='bx bx-chevron-down'></i>
-            </a>
+            </a> -->
 
-            <ul class="dropdown-menu-custom">
+            <!-- <ul class="dropdown-menu-custom">
                 <li>
                     <a href="/features/pos">POS Features</a>
                 </li>
@@ -145,7 +145,7 @@ window.smartsupp||(function(d) {
                     <a href="/features/reports">Reports & Analytics</a>
                 </li>
             </ul>
-        </li>
+        </li> -->
 
         <!-- MOBILE BUTTONS -->
 
