@@ -294,9 +294,9 @@ window.smartsupp||(function(d) {
                 your account
             </h2>
 
-            <!-- <p>
+            <p>
                 Create an account with us
-            </p> -->
+            </p>
 
             <div class="step-bottom">
                 Step 01
