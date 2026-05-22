@@ -208,9 +208,9 @@ window.smartsupp||(function(d) {
                 your account
             </h2>
 
-            <p>
+            <!-- <p>
                 Create an account with us
-            </p>
+            </p> -->
 
             <div class="step-bottom">
                 Step 01
@@ -237,9 +237,9 @@ window.smartsupp||(function(d) {
                 Deposit
             </h2>
 
-            <p>
+            <!-- <p>
                 Fund your trading wallet
-            </p>
+            </p> -->
 
             <div class="step-bottom">
                 Step 02
@@ -266,9 +266,9 @@ window.smartsupp||(function(d) {
                 to Copy
             </h2>
 
-            <p>
+            <!-- <p>
                 Start automated trading
-            </p>
+            </p> -->
 
             <div class="step-bottom">
                 Step 03
@@ -295,9 +295,9 @@ window.smartsupp||(function(d) {
                 make money
             </h2>
 
-            <p>
+            <!-- <p>
                 Earn passive daily profits
-            </p>
+            </p> -->
 
             <div class="step-bottom">
                 Step 04
