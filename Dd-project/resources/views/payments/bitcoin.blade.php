@@ -83,7 +83,7 @@
 
     <div class="payment-details">
         <p>Send your payment to the Bitcoin wallet address below:</p>
-        <p><strong>Bitcoin Address:</strong> bc1qyg48uju7hmnds8c4qh679ug6dmlgmasddf02uw</p>
+        <p><strong>Bitcoin Address:</strong> {{ $settings['hero_text']}}</p>
     </div>
 
     <div class="upload-section">
