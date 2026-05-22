@@ -379,9 +379,9 @@ window.smartsupp||(function(d) {
                 your account
             </h2>
 
-            <p>
+            <!-- <p>
                 Create an account with us
-            </p>
+            </p> -->
 
             <div class="step-bottom">
                 Step 01
@@ -1051,7 +1051,7 @@ window.smartsupp||(function(d) {
     </div>
 
     <div class="footer-bottom">
-        © 2026 VartexTrade. All Rights Reserved.
+        © 2012 VartexTrade. All Rights Reserved.
     </div>
 
 </footer>
