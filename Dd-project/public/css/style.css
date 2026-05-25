@@ -316,7 +316,7 @@ body{
 
 .hero{
     min-height:100vh;
-    padding:50px 7% 80px;
+    padding:150px 7% 80px;
     display:flex;
     justify-content:space-between;
     align-items:center;
@@ -695,11 +695,22 @@ footer{
     .steps-container{
         flex-direction: column;
     }
+.navbar{
+    width:100%;
+    padding:20px 7%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:fixed;
+    top:0;
+    left:0;
+    z-index:1000;
 
-    .navbar{
-        /* flex-direction: column; */
-        margin-bottom: 1rem;
-    }
+    background:rgba(2,6,23,0.95);
+    backdrop-filter:blur(12px);
+
+    border-bottom:1px solid rgba(255,255,255,0.05);
+}
 
 }
 
@@ -1443,13 +1454,12 @@ footer{
 /* ========================= */
 /* LIVE MARKET TICKER */
 /* ========================= */
-
 .ticker-section{
     width:100%;
     overflow:hidden;
     margin-top: 6rem;
     background:#020617;
-    padding:18px 0;
+    padding:85px 0;
     border-top:1px solid rgba(255,255,255,0.05);
     border-bottom:1px solid rgba(255,255,255,0.05);
 }

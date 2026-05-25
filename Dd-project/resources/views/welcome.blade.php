@@ -169,8 +169,8 @@ body{
         <li><a href="#market">Markets</a></li>
         <li><a href="#plans">Plans</a></li>
         <li><a href="#offer">Offers</a></li>
-        <li class="dropdown">
-            <a href="#" class="dropdown-toggle">
+        {{-- <li class="dropdown">
+             <a href="#" class="dropdown-toggle">
                 Features <i class='bx bx-chevron-down'></i>
             </a>
 
@@ -187,10 +187,7 @@ body{
                     <a href="/features/reports">Reports & Analytics</a>
                 </li>
             </ul>
-        </li>
-        <li class="translate-li">
-            <div id="google_translate_element"></div>
-        </li>
+        </li> --}}
 
         <!-- MOBILE BUTTONS -->
 
@@ -232,90 +229,6 @@ body{
 
 </header>
 
-
-<!-- ========================= -->
-<!-- LIVE MARKET TICKER -->
-<!-- ========================= -->
-
-<section class="ticker-section" id="market">
-
-    <div class="ticker-wrapper">
-
-        <div class="ticker-track">
-
-            <!-- FIRST LOOP -->
-
-            @foreach($data as $coin)
-
-                <div class="ticker-item">
-
-                    <img src="{{ $coin['image'] }}" alt="">
-
-                    <div class="ticker-info">
-
-                        <h4>
-                            {{ strtoupper($coin['symbol']) }}/USD
-                        </h4>
-
-                        <p>
-                            ${{ number_format($coin['current_price'], 2) }}
-                        </p>
-
-                    </div>
-
-                    <span class="
-                        {{ $coin['price_change_percentage_24h'] >= 0
-                        ? 'positive'
-                        : 'negative' }}
-                    ">
-
-                        {{ number_format($coin['price_change_percentage_24h'], 2) }}%
-
-                    </span>
-
-                </div>
-
-            @endforeach
-
-            <!-- DUPLICATE FOR INFINITE SLIDE -->
-
-            @foreach($data as $coin)
-
-                <div class="ticker-item">
-
-                    <img src="{{ $coin['image'] }}" alt="">
-
-                    <div class="ticker-info">
-
-                        <h4>
-                            {{ strtoupper($coin['symbol']) }}/USD
-                        </h4>
-
-                        <p>
-                            ${{ number_format($coin['current_price'], 2) }}
-                        </p>
-
-                    </div>
-
-                    <span class="
-                        {{ $coin['price_change_percentage_24h'] >= 0
-                        ? 'positive'
-                        : 'negative' }}
-                    ">
-
-                        {{ number_format($coin['price_change_percentage_24h'], 2) }}%
-
-                    </span>
-
-                </div>
-
-            @endforeach
-
-        </div>
-
-    </div>
-
-</section>
 
 <!-- HERO -->
 
@@ -422,9 +335,9 @@ body{
                 your account
             </h2>
 
-            <p>
+            <!-- <p>
                 Create an account with us
-            </p>
+            </p> -->
 
             <div class="step-bottom">
                 Step 01
@@ -451,9 +364,9 @@ body{
                 Deposit
             </h2>
 
-            <p>
+            <!-- <p>
                 Fund your trading wallet
-            </p>
+            </p> -->
 
             <div class="step-bottom">
                 Step 02
@@ -480,9 +393,9 @@ body{
                 to Copy
             </h2>
 
-            <p>
+            <!-- <p>
                 Start automated trading
-            </p>
+            </p> -->
 
             <div class="step-bottom">
                 Step 03
@@ -509,9 +422,9 @@ body{
                 make money
             </h2>
 
-            <p>
+            <!-- <p>
                 Earn passive daily profits
-            </p>
+            </p> -->
 
             <div class="step-bottom">
                 Step 04
@@ -532,6 +445,89 @@ body{
 </section>
 
 
+<!-- ========================= -->
+<!-- LIVE MARKET TICKER -->
+<!-- ========================= -->
+
+<section class="ticker-section" id="market">
+
+    <div class="ticker-wrapper">
+
+        <div class="ticker-track">
+
+            <!-- FIRST LOOP -->
+
+            @foreach($data as $coin)
+
+                <div class="ticker-item">
+
+                    <img src="{{ $coin['image'] }}" alt="">
+
+                    <div class="ticker-info">
+
+                        <h4>
+                            {{ strtoupper($coin['symbol']) }}/USD
+                        </h4>
+
+                        <p>
+                            ${{ number_format($coin['current_price'], 2) }}
+                        </p>
+
+                    </div>
+
+                    <span class="
+                        {{ $coin['price_change_percentage_24h'] >= 0
+                        ? 'positive'
+                        : 'negative' }}
+                    ">
+
+                        {{ number_format($coin['price_change_percentage_24h'], 2) }}%
+
+                    </span>
+
+                </div>
+
+            @endforeach
+
+            <!-- DUPLICATE FOR INFINITE SLIDE -->
+
+            @foreach($data as $coin)
+
+                <div class="ticker-item">
+
+                    <img src="{{ $coin['image'] }}" alt="">
+
+                    <div class="ticker-info">
+
+                        <h4>
+                            {{ strtoupper($coin['symbol']) }}/USD
+                        </h4>
+
+                        <p>
+                            ${{ number_format($coin['current_price'], 2) }}
+                        </p>
+
+                    </div>
+
+                    <span class="
+                        {{ $coin['price_change_percentage_24h'] >= 0
+                        ? 'positive'
+                        : 'negative' }}
+                    ">
+
+                        {{ number_format($coin['price_change_percentage_24h'], 2) }}%
+
+                    </span>
+
+                </div>
+
+            @endforeach
+
+        </div>
+
+    </div>
+
+</section>
 
 <!-- ========================= -->
 <!-- FOREX HERO SECTION -->
@@ -1097,7 +1093,7 @@ body{
     </div>
 
     <div class="footer-bottom">
-        © 2026 VartexTrade. All Rights Reserved.
+        © 2012 VartexTrade. All Rights Reserved.
     </div>
 
 </footer>
