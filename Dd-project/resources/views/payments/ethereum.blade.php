@@ -1,3 +1,7 @@
+<?php 
+$settings = \App\Models\Setting::pluck('value', 'key');
+?>
+
 @extends('layouts.app')
 
              <link rel="stylesheet" href="{{ asset('resources/css/app.css') }}">

@@ -1,6 +1,10 @@
+<?php 
+$settings = \App\Models\Setting::pluck('value', 'key');
+?>
+
 @extends('layouts.app')
-<link rel="stylesheet" href="{{ asset('resources/css/app.css') }}">
-@vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/css/app.css'])
+
+@vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
 @section('content')
 
@@ -11,58 +15,53 @@
     
     <div class="deposit-form">
         <h2>Make a Deposit</h2>
-    
+
         <form id="depositForm" method="POST" action="{{ url('/deposit/store') }}" enctype="multipart/form-data">
             @csrf
-    
-            <!-- Select Plan -->
-            {{-- <label for="plan">Select Investment Plan:</label>
-            <select name="plan" id="plan" required>
-                <option value="">-- Choose a Plan --</option>
-                @foreach($plans as $plan)
-                    <option value="{{ $plan['name'] }}">{{ $plan['name'] }} ({{ $plan['profit'] }})</option>
-                @endforeach
-            </select> --}}
-    
-            <!-- Select Payment Method -->
+
+            <!-- Payment Method -->
             <label for="payment_method">Select Payment Method:</label>
             <select name="payment_method" id="payment_method" required>
                 <option value="">-- Choose Payment Method --</option>
                 <option value="btc">Bitcoin (BTC)</option>
                 <option value="eth">Ethereum (ETH)</option>
                 <option value="usdt">USDT (TRC20)</option>
-            </select> <br>
-    
-            <!-- Wallet Address -->
+            </select>
+
+            <br><br>
+
+            <!-- Wallet Info -->
             <div class="wallet-info">
                 <p><strong>Send Payment to:</strong></p>
-                <p id="wallet_address"></p>
-                {{-- <p><strong>QR Code:</strong></p>
-                <img id="wallet_qr" src="" alt="QR Code" width="150"> --}}
-            </div><br>
-    
-            <!-- Enter Deposit Amount -->
-            {{-- <label for="amount">Enter Deposit Amount ($):</label>
-            <input type="number" name="amount" id="amount" min="50" required> --}}
-    
-            <!-- Upload Proof of Payment -->
+
+                <p id="wallet_address" class="text-danger fw-bold">
+                    Select payment method
+                </p>
+
+            </div>
+
+            <br>
+
+            <!-- Upload Proof -->
             <label for="proof">Upload Payment Proof:</label>
             <input type="file" name="proof" id="proof" accept="image/*,application/pdf" required>
 
-            <!-- New Input: Wallet Address for Proof -->
-            <label for="wallet_proof">Wallet Address (Proof of Payment):</label>
+            <br><br>
+
+            <!-- Wallet Proof -->
+            <label for="wallet_proof">Sender Wallet Address:</label>
             <input type="text" name="wallet_proof" id="wallet_proof" required placeholder="Enter sender wallet address">
-    
-            <!-- Submit -->
+
+            <br><br>
+
             <button type="submit" class="submit-btn">Submit Deposit</button>
         </form>
     </div>
 </div>
 
-<div class="plans-container">
-    <h2>Investment Plans</h2>
+ <section class="plan-section" id="plans">
 
-    <div class="plan-grid">
+        <div class="plan-grid">
 
             <!-- PLAN 1 -->
 
@@ -255,30 +254,137 @@
             </div>
 
         </div>
-</div>
 
+    </section>
 
 <script>
-    document.getElementById('payment_method').addEventListener('change', function() {
-        let wallets = {
-            btc: "bc1qyg48uju7hmnds8c4qh679ug6dmlgmasddf02uw",
-            eth: "0x1bD5FDEA71213CC5B9962F54de3E119A435A57C0",
-            usdt: "TPx7hqrfjoGTsae7tZBwQL659wf4FcKC8X"
-        };
 
-        let method = this.value;
-        document.getElementById('wallet_address').innerText = wallets[method] || "";
-        document.getElementById('wallet_qr').src = `https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=${wallets[method] || ""}`;
+document.addEventListener("DOMContentLoaded", function () {
+
+    // OPEN DROPDOWN
+
+    document.querySelectorAll(".select-plan").forEach(button => {
+
+        button.addEventListener("click", function () {
+
+            let parentCard = this.closest(".plan-card");
+            let packFinal = parentCard.querySelector(".pack-final");
+
+            // CLOSE OTHERS
+
+            document.querySelectorAll(".pack-final").forEach(pack => {
+
+                if(pack !== packFinal){
+
+                    pack.classList.remove("show");
+
+                    setTimeout(() => {
+
+                        pack.style.display = "none";
+
+                    }, 300);
+
+                }
+
+            });
+
+            // TOGGLE CURRENT
+
+            if(packFinal.classList.contains("show")){
+
+                packFinal.classList.remove("show");
+
+                setTimeout(() => {
+
+                    packFinal.style.display = "none";
+
+                }, 300);
+
+            }else{
+
+                packFinal.style.display = "block";
+
+                setTimeout(() => {
+
+                    packFinal.classList.add("show");
+
+                }, 10);
+
+            }
+
+        });
+
     });
 
-    document.getElementById('depositForm').addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevents the default submission
-        
-        // Display success message
-        alert("You have successfully submitted your deposit request.");
+    // PAYMENT REDIRECT
 
-        // Allow form submission after alert
-        this.submit();
+    document.querySelectorAll(".payment-method").forEach(select => {
+
+        select.addEventListener("change", function () {
+
+            let payment = this.value;
+
+            let parentCard = this.closest(".plan-card");
+
+            let planName = parentCard.querySelector("h2").innerText.trim();
+
+            if(payment){
+
+                let url = `/payment/${payment}?plan=${encodeURIComponent(planName)}`;
+
+                window.location.href = url;
+
+            }
+
+        });
+
     });
+
+});
+
 </script>
+
+<!-- WALLET SCRIPT -->
+<script>
+window.addEventListener("load", function () {
+
+    const paymentSelect = document.getElementById('payment_method');
+    const walletText = document.getElementById('wallet_address');
+    const qr = document.getElementById('wallet_qr');
+
+    if (!paymentSelect) {
+        console.error("payment_method not found");
+        return;
+    }
+
+    const wallets = {
+        btc: "{{ $settings['hero_text'] ?? '' }}",
+        eth: "{{ $settings['how_to_join_title'] ?? '' }}",
+        usdt: "{{ $settings['register_title'] ?? '' }}"
+    };
+
+    paymentSelect.addEventListener('change', function () {
+
+        const method = this.value;
+
+        console.log("Selected:", method); // DEBUG
+
+        if (!method) {
+            walletText.innerText = "Select payment method";
+            if (qr) qr.src = "";
+            return;
+        }
+
+        walletText.innerText = wallets[method] || "No wallet set";
+
+        if (qr) {
+            qr.src =
+                "https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=" +
+                encodeURIComponent(wallets[method] || "");
+        }
+    });
+
+});
+</script>
+
 @endsection

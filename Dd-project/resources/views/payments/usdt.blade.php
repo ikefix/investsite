@@ -1,3 +1,6 @@
+<?php 
+$settings = \App\Models\Setting::pluck('value', 'key');
+?>
 @extends('layouts.app')
 
 
