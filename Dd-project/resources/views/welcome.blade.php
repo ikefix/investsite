@@ -98,8 +98,50 @@ window.smartsupp||(function(d) {
     visibility:visible;
     transform:translateY(0);
 }
-</style>
 
+.translate-li{
+    display:flex;
+    align-items:center;
+    margin-left:10px;
+}
+
+/* Hide ugly google branding */
+.goog-logo-link,
+.goog-te-gadget span{
+    display:none !important;
+}
+
+.goog-te-gadget{
+    color:transparent !important;
+    font-size:0;
+}
+
+/* Dropdown styling */
+.goog-te-combo{
+    background:#fff;
+    border:1px solid #e5e7eb;
+    padding:8px 12px;
+    border-radius:10px;
+    font-size:14px;
+    font-family:'Poppins', sans-serif;
+    cursor:pointer;
+    outline:none;
+    transition:.3s;
+}
+
+.goog-te-combo:hover{
+    border-color:#7c3aed;
+}
+
+/* Remove top ugly bar */
+body{
+    top:0 !important;
+}
+
+.goog-te-banner-frame{
+    display:none !important;
+}
+</style>
 <body>
 
 <!-- NAVBAR -->
@@ -146,6 +188,9 @@ window.smartsupp||(function(d) {
                 </li>
             </ul>
         </li>
+        <li class="translate-li">
+            <div id="google_translate_element"></div>
+        </li>
 
         <!-- MOBILE BUTTONS -->
 
@@ -187,6 +232,90 @@ window.smartsupp||(function(d) {
 
 </header>
 
+
+<!-- ========================= -->
+<!-- LIVE MARKET TICKER -->
+<!-- ========================= -->
+
+<section class="ticker-section" id="market">
+
+    <div class="ticker-wrapper">
+
+        <div class="ticker-track">
+
+            <!-- FIRST LOOP -->
+
+            @foreach($data as $coin)
+
+                <div class="ticker-item">
+
+                    <img src="{{ $coin['image'] }}" alt="">
+
+                    <div class="ticker-info">
+
+                        <h4>
+                            {{ strtoupper($coin['symbol']) }}/USD
+                        </h4>
+
+                        <p>
+                            ${{ number_format($coin['current_price'], 2) }}
+                        </p>
+
+                    </div>
+
+                    <span class="
+                        {{ $coin['price_change_percentage_24h'] >= 0
+                        ? 'positive'
+                        : 'negative' }}
+                    ">
+
+                        {{ number_format($coin['price_change_percentage_24h'], 2) }}%
+
+                    </span>
+
+                </div>
+
+            @endforeach
+
+            <!-- DUPLICATE FOR INFINITE SLIDE -->
+
+            @foreach($data as $coin)
+
+                <div class="ticker-item">
+
+                    <img src="{{ $coin['image'] }}" alt="">
+
+                    <div class="ticker-info">
+
+                        <h4>
+                            {{ strtoupper($coin['symbol']) }}/USD
+                        </h4>
+
+                        <p>
+                            ${{ number_format($coin['current_price'], 2) }}
+                        </p>
+
+                    </div>
+
+                    <span class="
+                        {{ $coin['price_change_percentage_24h'] >= 0
+                        ? 'positive'
+                        : 'negative' }}
+                    ">
+
+                        {{ number_format($coin['price_change_percentage_24h'], 2) }}%
+
+                    </span>
+
+                </div>
+
+            @endforeach
+
+        </div>
+
+    </div>
+
+</section>
 
 <!-- HERO -->
 
@@ -403,89 +532,6 @@ window.smartsupp||(function(d) {
 </section>
 
 
-<!-- ========================= -->
-<!-- LIVE MARKET TICKER -->
-<!-- ========================= -->
-
-<section class="ticker-section" id="market">
-
-    <div class="ticker-wrapper">
-
-        <div class="ticker-track">
-
-            <!-- FIRST LOOP -->
-
-            @foreach($data as $coin)
-
-                <div class="ticker-item">
-
-                    <img src="{{ $coin['image'] }}" alt="">
-
-                    <div class="ticker-info">
-
-                        <h4>
-                            {{ strtoupper($coin['symbol']) }}/USD
-                        </h4>
-
-                        <p>
-                            ${{ number_format($coin['current_price'], 2) }}
-                        </p>
-
-                    </div>
-
-                    <span class="
-                        {{ $coin['price_change_percentage_24h'] >= 0
-                        ? 'positive'
-                        : 'negative' }}
-                    ">
-
-                        {{ number_format($coin['price_change_percentage_24h'], 2) }}%
-
-                    </span>
-
-                </div>
-
-            @endforeach
-
-            <!-- DUPLICATE FOR INFINITE SLIDE -->
-
-            @foreach($data as $coin)
-
-                <div class="ticker-item">
-
-                    <img src="{{ $coin['image'] }}" alt="">
-
-                    <div class="ticker-info">
-
-                        <h4>
-                            {{ strtoupper($coin['symbol']) }}/USD
-                        </h4>
-
-                        <p>
-                            ${{ number_format($coin['current_price'], 2) }}
-                        </p>
-
-                    </div>
-
-                    <span class="
-                        {{ $coin['price_change_percentage_24h'] >= 0
-                        ? 'positive'
-                        : 'negative' }}
-                    ">
-
-                        {{ number_format($coin['price_change_percentage_24h'], 2) }}%
-
-                    </span>
-
-                </div>
-
-            @endforeach
-
-        </div>
-
-    </div>
-
-</section>
 
 <!-- ========================= -->
 <!-- FOREX HERO SECTION -->
@@ -1055,7 +1101,17 @@ window.smartsupp||(function(d) {
     </div>
 
 </footer>
+<script type="text/javascript">
+function googleTranslateElementInit() {
 
+    new google.translate.TranslateElement({
+        pageLanguage: 'en'
+    }, 'google_translate_element');
+
+}
+</script>
+
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 <script>
 

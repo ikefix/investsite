@@ -103,7 +103,7 @@ body{
     position:fixed;
     top:0;
     left:0;
-    z-index:1000;
+    z-index:80;
     background:#020617;
     border-bottom:1px solid rgba(255,255,255,0.05);
 }
@@ -316,7 +316,7 @@ body{
 
 .hero{
     min-height:100vh;
-    padding:150px 7% 80px;
+    padding:50px 7% 80px;
     display:flex;
     justify-content:space-between;
     align-items:center;
@@ -706,7 +706,7 @@ footer{
 @media(max-width:600px){
 
     .hero{
-        padding-top:170px;
+        padding-top:40px;
     }
 
     .hero-left h1{
@@ -1447,6 +1447,7 @@ footer{
 .ticker-section{
     width:100%;
     overflow:hidden;
+    margin-top: 6rem;
     background:#020617;
     padding:18px 0;
     border-top:1px solid rgba(255,255,255,0.05);

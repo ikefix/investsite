@@ -1,5 +1,6 @@
 @extends('layouts.app')
 <link rel="stylesheet" href="{{ asset('resources/css/app.css') }}">
+@vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/css/app.css'])
 
 @section('content')
 
@@ -61,30 +62,199 @@
 <div class="plans-container">
     <h2>Investment Plans</h2>
 
-    @php
-        $plans = [
-            ['name' => 'PROMO PLAN', 'profit' => '30% daily', 'duration' => '5 days', 'min' => 500, 'max' => 4999],
-            ['name' => 'GOLDEN PROMO PLAN', 'profit' => '38% daily', 'duration' => '12 days', 'min' => 5000, 'max' => 'No Limit'],
-            ['name' => 'STARTER PLAN', 'profit' => '5% after 24 hours', 'duration' => '24 hours', 'min' => 50, 'max' => 299],
-            ['name' => 'BRONZE PLAN', 'profit' => '10% daily', 'duration' => '48 hours', 'min' => 300, 'max' => 499],
-            ['name' => 'GOLD PLAN', 'profit' => '15% daily', 'duration' => '4 days', 'min' => 500, 'max' => 999],
-            ['name' => 'FAMILY JOINT ACCOUNT', 'profit' => '50% daily', 'duration' => '60 days', 'min' => 7000, 'max' => 'Unlimited'],
-            ['name' => 'DIAMOND PLAN', 'profit' => '20% daily', 'duration' => '7 days', 'min' => 1000, 'max' => 4999],
-            ['name' => 'PLATINUM PLAN', 'profit' => '25% daily', 'duration' => '12 days', 'min' => 5000, 'max' => 'No Limit'],
-        ];
-    @endphp
+    <div class="plan-grid">
 
-    @foreach($plans as $plan)
-    <div class="deposit-plan">
-        <h3>{{ $plan['name'] }}</h3>
-        <ul>
-            <li><span class="highlight">{{ $plan['profit'] }}</span> for {{ $plan['duration'] }}</li>
-            <li>Min: ${{ $plan['min'] }} | Max: {{ $plan['max'] }}</li>
-            <li>Referral Commission: 10%</li>
-            <li>Profit Withdraw: Yes</li>
-        </ul>
-    </div>
-    @endforeach
+            <!-- PLAN 1 -->
+
+            <div class="plan-card">
+
+                <h2>Basic Plan</h2>
+
+                <h1>25%</h1>
+
+                <p>Daily Return</p>
+
+                <ul>
+                    <li><b>Minimum Invest:</b> $5,000</li>
+                    <li><b>Maximum Invest:</b> $10,000</li>
+                    <li><b>24/7</b> Support</li>
+                    <li><b>Capital Return:</b> Yes</li>
+                </ul>
+
+                <button class="select-plan">
+                    Invest Now
+                </button>
+
+                <!-- PAYMENT DROPDOWN -->
+
+                <div class="pack-final">
+
+                    <select class="payment-method">
+
+                        <option value="">
+                            Select Payment Method
+                        </option>
+
+                        <option value="bitcoin">
+                            Bitcoin
+                        </option>
+
+                        <option value="ethereum">
+                            Ethereum
+                        </option>
+
+                        <option value="usdt">
+                            USDT
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            <!-- PLAN 2 -->
+
+            <div class="plan-card active">
+
+                <h2>Standard Plan</h2>
+
+                <h1>35%</h1>
+
+                <p>Daily Return</p>
+
+                <ul>
+                    <li><b>Minimum Invest:</b> $10,000</li>
+                    <li><b>Maximum Invest:</b> $50,000</li>
+                    <li><b>24/7</b> Support</li>
+                    <li><b>Capital Return:</b> Yes</li>
+                </ul>
+
+                <button class="select-plan">
+                    Invest Now
+                </button>
+
+                <div class="pack-final">
+
+                    <select class="payment-method">
+
+                        <option value="">
+                            Select Payment Method
+                        </option>
+
+                        <option value="bitcoin">
+                            Bitcoin
+                        </option>
+
+                        <option value="ethereum">
+                            Ethereum
+                        </option>
+
+                        <option value="usdt">
+                            USDT
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            <!-- PLAN 3 -->
+
+            <div class="plan-card">
+
+                <h2>Premium Plan</h2>
+
+                <h1>50%</h1>
+
+                <p>Daily Return</p>
+
+                <ul>
+                    <li><b>Minimum Invest:</b> $50,000</li>
+                    <li><b>Maximum Invest:</b> $100,000</li>
+                    <li><b>24/7</b> Support</li>
+                    <li><b>Capital Return:</b> Yes</li>
+                </ul>
+
+                <button class="select-plan">
+                    Invest Now
+                </button>
+
+                <div class="pack-final">
+
+                    <select class="payment-method">
+
+                        <option value="">
+                            Select Payment Method
+                        </option>
+
+                        <option value="bitcoin">
+                            Bitcoin
+                        </option>
+
+                        <option value="ethereum">
+                            Ethereum
+                        </option>
+
+                        <option value="usdt">
+                            USDT
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            <!-- PLAN 4 -->
+
+            <div class="plan-card">
+
+                <h2>Institutional Plan</h2>
+
+                <h1>65%</h1>
+
+                <p>Daily Return</p>
+
+                <ul>
+                    <li><b>Minimum Invest:</b> $100,000</li>
+                    <li><b>Maximum Invest:</b> $1,800,000</li>
+                    <li><b>24/7</b> Support</li>
+                    <li><b>Capital Return:</b> Yes</li>
+                </ul>
+
+                <button class="select-plan">
+                    Invest Now
+                </button>
+
+                <div class="pack-final">
+
+                    <select class="payment-method">
+
+                        <option value="">
+                            Select Payment Method
+                        </option>
+
+                        <option value="bitcoin">
+                            Bitcoin
+                        </option>
+
+                        <option value="ethereum">
+                            Ethereum
+                        </option>
+
+                        <option value="usdt">
+                            USDT
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+        </div>
 </div>
 
 
