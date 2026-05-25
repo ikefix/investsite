@@ -98,6 +98,49 @@ window.smartsupp||(function(d) {
     visibility:visible;
     transform:translateY(0);
 }
+
+.translate-li{
+    display:flex;
+    align-items:center;
+    margin-left:10px;
+}
+
+/* Hide ugly google branding */
+.goog-logo-link,
+.goog-te-gadget span{
+    display:none !important;
+}
+
+.goog-te-gadget{
+    color:transparent !important;
+    font-size:0;
+}
+
+/* Dropdown styling */
+.goog-te-combo{
+    background:#fff;
+    border:1px solid #e5e7eb;
+    padding:8px 12px;
+    border-radius:10px;
+    font-size:14px;
+    font-family:'Poppins', sans-serif;
+    cursor:pointer;
+    outline:none;
+    transition:.3s;
+}
+
+.goog-te-combo:hover{
+    border-color:#7c3aed;
+}
+
+/* Remove top ugly bar */
+body{
+    top:0 !important;
+}
+
+.goog-te-banner-frame{
+    display:none !important;
+}
 </style>
 
 <body>
@@ -146,6 +189,8 @@ window.smartsupp||(function(d) {
                 </li>
             </ul>
         </li> -->
+        
+        <li class="translate-li"><div id="google_translate_element"></div></li>
 
         <!-- MOBILE BUTTONS -->
 
@@ -1056,7 +1101,17 @@ window.smartsupp||(function(d) {
 
 </footer>
 
+<script type="text/javascript">
+function googleTranslateElementInit() {
 
+    new google.translate.TranslateElement({
+        pageLanguage: 'en'
+    }, 'google_translate_element');
+
+}
+</script>
+
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 <script>
 
 const hamburger = document.getElementById("hamburger");

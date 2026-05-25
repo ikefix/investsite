@@ -316,7 +316,7 @@ body{
 
 .hero{
     min-height:100vh;
-    padding:80px 7% 80px;
+    padding:40px 7% 80px;
     display:flex;
     justify-content:space-between;
     align-items:center;
@@ -1458,9 +1458,10 @@ footer{
     width:100%;
     overflow:hidden;
     background:#020617;
-    padding:85px 0;
+    padding:15px 0;
     border-top:1px solid rgba(255,255,255,0.05);
     border-bottom:1px solid rgba(255,255,255,0.05);
+    margin-top: 5.5rem;
 }
 
 /* WRAPPER */

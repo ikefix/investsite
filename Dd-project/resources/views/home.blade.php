@@ -3,9 +3,9 @@
     <link rel="stylesheet" href="{{ asset('resources/css/app.css') }}">
     @section('content')
     <div class="home-container">
-        <div class="message">
+        <!-- <div class="message">
             <a href="https://t.me/Singhal_Anurag" target="_blank"><i class='bx bxl-telegram'></i></a>
-        </div>
+        </div> -->
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="">
