@@ -27,7 +27,7 @@
             </div>
         </div>
 
-        <div class="hero">
+        <div class="hero" style="background-color:#12122cda;">
             <div class="hero-head">
                 <h2></h2>
                 <div class="head-pay">
