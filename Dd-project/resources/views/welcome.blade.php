@@ -142,7 +142,6 @@ body{
     display:none !important;
 }
 </style>
-
 <body>
 
 <!-- NAVBAR -->
@@ -170,12 +169,12 @@ body{
         <li><a href="#market">Markets</a></li>
         <li><a href="#plans">Plans</a></li>
         <li><a href="#offer">Offers</a></li>
-        <li class="dropdown">
-            <!-- <a href="#" class="dropdown-toggle">
+        {{-- <li class="dropdown">
+             <a href="#" class="dropdown-toggle">
                 Features <i class='bx bx-chevron-down'></i>
-            </a> -->
+            </a>
 
-            <!-- <ul class="dropdown-menu-custom">
+            <ul class="dropdown-menu-custom">
                 <li>
                     <a href="/features/pos">POS Features</a>
                 </li>
@@ -189,8 +188,6 @@ body{
                 </li>
             </ul>
         </li> -->
-        
-        <li class="translate-li"><div id="google_translate_element"></div></li>
 
         <!-- MOBILE BUTTONS -->
 
@@ -232,92 +229,6 @@ body{
 
 </header>
 
-</section>
-
-
-<!-- ========================= -->
-<!-- LIVE MARKET TICKER -->
-<!-- ========================= -->
-
-<section class="ticker-section" id="market">
-
-    <div class="ticker-wrapper">
-
-        <div class="ticker-track">
-
-            <!-- FIRST LOOP -->
-
-            @foreach($data as $coin)
-
-                <div class="ticker-item">
-
-                    <img src="{{ $coin['image'] }}" alt="">
-
-                    <div class="ticker-info">
-
-                        <h4>
-                            {{ strtoupper($coin['symbol']) }}/USD
-                        </h4>
-
-                        <p>
-                            ${{ number_format($coin['current_price'], 2) }}
-                        </p>
-
-                    </div>
-
-                    <span class="
-                        {{ $coin['price_change_percentage_24h'] >= 0
-                        ? 'positive'
-                        : 'negative' }}
-                    ">
-
-                        {{ number_format($coin['price_change_percentage_24h'], 2) }}%
-
-                    </span>
-
-                </div>
-
-            @endforeach
-
-            <!-- DUPLICATE FOR INFINITE SLIDE -->
-
-            @foreach($data as $coin)
-
-                <div class="ticker-item">
-
-                    <img src="{{ $coin['image'] }}" alt="">
-
-                    <div class="ticker-info">
-
-                        <h4>
-                            {{ strtoupper($coin['symbol']) }}/USD
-                        </h4>
-
-                        <p>
-                            ${{ number_format($coin['current_price'], 2) }}
-                        </p>
-
-                    </div>
-
-                    <span class="
-                        {{ $coin['price_change_percentage_24h'] >= 0
-                        ? 'positive'
-                        : 'negative' }}
-                    ">
-
-                        {{ number_format($coin['price_change_percentage_24h'], 2) }}%
-
-                    </span>
-
-                </div>
-
-            @endforeach
-
-        </div>
-
-    </div>
-
-</section>
 
 <!-- HERO -->
 
@@ -531,6 +442,92 @@ body{
 
     </p>
 
+</section>
+
+
+<!-- ========================= -->
+<!-- LIVE MARKET TICKER -->
+<!-- ========================= -->
+
+<section class="ticker-section" id="market">
+
+    <div class="ticker-wrapper">
+
+        <div class="ticker-track">
+
+            <!-- FIRST LOOP -->
+
+            @foreach($data as $coin)
+
+                <div class="ticker-item">
+
+                    <img src="{{ $coin['image'] }}" alt="">
+
+                    <div class="ticker-info">
+
+                        <h4>
+                            {{ strtoupper($coin['symbol']) }}/USD
+                        </h4>
+
+                        <p>
+                            ${{ number_format($coin['current_price'], 2) }}
+                        </p>
+
+                    </div>
+
+                    <span class="
+                        {{ $coin['price_change_percentage_24h'] >= 0
+                        ? 'positive'
+                        : 'negative' }}
+                    ">
+
+                        {{ number_format($coin['price_change_percentage_24h'], 2) }}%
+
+                    </span>
+
+                </div>
+
+            @endforeach
+
+            <!-- DUPLICATE FOR INFINITE SLIDE -->
+
+            @foreach($data as $coin)
+
+                <div class="ticker-item">
+
+                    <img src="{{ $coin['image'] }}" alt="">
+
+                    <div class="ticker-info">
+
+                        <h4>
+                            {{ strtoupper($coin['symbol']) }}/USD
+                        </h4>
+
+                        <p>
+                            ${{ number_format($coin['current_price'], 2) }}
+                        </p>
+
+                    </div>
+
+                    <span class="
+                        {{ $coin['price_change_percentage_24h'] >= 0
+                        ? 'positive'
+                        : 'negative' }}
+                    ">
+
+                        {{ number_format($coin['price_change_percentage_24h'], 2) }}%
+
+                    </span>
+
+                </div>
+
+            @endforeach
+
+        </div>
+
+    </div>
+
+</section>
 
 <!-- ========================= -->
 <!-- FOREX HERO SECTION -->
@@ -1101,17 +1098,7 @@ body{
 
 </footer>
 
-<script type="text/javascript">
-function googleTranslateElementInit() {
 
-    new google.translate.TranslateElement({
-        pageLanguage: 'en'
-    }, 'google_translate_element');
-
-}
-</script>
-
-<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 <script>
 
 const hamburger = document.getElementById("hamburger");
