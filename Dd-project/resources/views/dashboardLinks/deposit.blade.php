@@ -8,6 +8,22 @@ $settings = \App\Models\Setting::pluck('value', 'key');
 
 @section('content')
 
+<style>
+    .copy-btn{
+    background:#16a34a;
+    color:#fff;
+    border:none;
+    padding:8px 14px;
+    border-radius:6px;
+    cursor:pointer;
+    margin-top:10px;
+}
+
+.copy-btn:hover{
+    background:#15803d;
+}
+</style>
+
 <div class="deposit-body">
     <div class="crypto-image">
         <img src="https://images.unsplash.com/photo-1518546305927-5a555bb7020d?q=80&w=1200&auto=format&fit=crop" alt="Crypto Investment">
@@ -38,6 +54,9 @@ $settings = \App\Models\Setting::pluck('value', 'key');
                     Select payment method
                 </p>
 
+                <button type="button" id="copy_wallet_btn" class="copy-btn">
+                    Copy Address
+                </button>
             </div>
 
             <br>
@@ -345,7 +364,7 @@ document.addEventListener("DOMContentLoaded", function () {
 </script>
 
 <!-- WALLET SCRIPT -->
-<script>
+<!-- <script>
 window.addEventListener("load", function () {
 
     const paymentSelect = document.getElementById('payment_method');
@@ -382,6 +401,73 @@ window.addEventListener("load", function () {
                 "https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=" +
                 encodeURIComponent(wallets[method] || "");
         }
+    });
+
+});
+</script> -->
+
+<script>
+window.addEventListener("load", function () {
+
+    const paymentSelect = document.getElementById('payment_method');
+    const walletText = document.getElementById('wallet_address');
+    const qr = document.getElementById('wallet_qr');
+    const copyBtn = document.getElementById('copy_wallet_btn');
+
+    if (!paymentSelect) {
+        console.error("payment_method not found");
+        return;
+    }
+
+    const wallets = {
+        btc: "{{ $settings['hero_text'] ?? '' }}",
+        eth: "{{ $settings['how_to_join_title'] ?? '' }}",
+        usdt: "{{ $settings['register_title'] ?? '' }}"
+    };
+
+    paymentSelect.addEventListener('change', function () {
+
+        const method = this.value;
+
+        if (!method) {
+            walletText.innerText = "Select payment method";
+            if (qr) qr.src = "";
+            return;
+        }
+
+        walletText.innerText = wallets[method] || "No wallet set";
+
+        if (qr) {
+            qr.src =
+                "https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=" +
+                encodeURIComponent(wallets[method] || "");
+        }
+    });
+
+    // COPY BUTTON
+    copyBtn.addEventListener("click", function () {
+
+        const address = walletText.innerText;
+
+        if (
+            address === "Select payment method" ||
+            address === "No wallet set"
+        ) {
+            alert("Please select a payment method first");
+            return;
+        }
+
+        navigator.clipboard.writeText(address)
+            .then(() => {
+                copyBtn.innerText = "Copied!";
+
+                setTimeout(() => {
+                    copyBtn.innerText = "Copy Address";
+                }, 2000);
+            })
+            .catch(err => {
+                console.error("Copy failed:", err);
+            });
     });
 
 });

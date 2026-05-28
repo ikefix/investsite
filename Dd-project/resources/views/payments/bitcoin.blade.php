@@ -79,6 +79,19 @@ $settings = \App\Models\Setting::pluck('value', 'key');
     .submit-btn:hover {
         background: #b71c1c;
     }
+    .copy-btn{
+    background:#16a34a;
+    color:#fff;
+    border:none;
+    padding:8px 14px;
+    border-radius:6px;
+    cursor:pointer;
+    margin-top:10px;
+}
+
+.copy-btn:hover{
+    background:#15803d;
+}
 </style>
 
 <div class="payment-container">
@@ -87,7 +100,13 @@ $settings = \App\Models\Setting::pluck('value', 'key');
 
     <div class="payment-details">
         <p>Send your payment to the Bitcoin wallet address below:</p>
-        <p><strong>Bitcoin Address:</strong> {{ $settings['hero_text']}}</p>
+            <p>
+                <strong>Bitcoin Address:</strong> 
+                <span id="btcAddress">{{ $settings['hero_text'] }}</span>
+            </p> 
+         <button type="button" onclick="copyWallet()" class="copy-btn">
+            Copy Address
+        </button>
     </div>
 
     <div class="upload-section">
@@ -104,4 +123,18 @@ $settings = \App\Models\Setting::pluck('value', 'key');
         </form>
     </div>
 </div>
+
+<script>
+    function copyWallet() {
+        const address = document.getElementById('btcAddress').innerText;
+
+        navigator.clipboard.writeText(address)
+            .then(() => {
+                alert('Wallet address copied!');
+            })
+            .catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+    }
+</script>
 @endsection
