@@ -38,7 +38,7 @@
             <div class="hero-body">
                 <div class="dashboard-container">
                     <div class="card">
-                        <h6>Total Balance</h6>
+                        <h6>Account Balance</h6>
                         <h4>${{ number_format(auth()->user()->balance->balance ?? 0, 2) }}</h4>
                         <div class="graph-container">
                             <svg id="graph1">
@@ -54,7 +54,7 @@
                         </div>
                     </div>
                     <div class="card">
-                        <h6>Active Investment</h6>
+                        <h6>Investment Balance</h6>
                         <h4>${{ number_format(auth()->user()->depositBalance->balance ?? 0, 2) }}</h4>
                         <div class="graph-container">
                             <svg id="graph2">
@@ -70,8 +70,8 @@
                         </div>
                     </div>
                     <div class="card">
-                        <h6>Total Referral Commission</h6>
-                        <h4>$0.00</h4>
+                        <h6>ROI</h6>
+                        <h4 id="percentBalance">$0.00</h4>
                         <div class="graph-container">
                             <svg id="graph3">
                                 <defs>
@@ -85,7 +85,7 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="card">
+                    <!-- <div class="card">
                         <h6>Account Stats</h6>
                         <h4>Active</h4>
                         <div class="graph-container">
@@ -100,7 +100,7 @@
                                 <path class="line" stroke="rgb(255, 200, 0)" />
                             </svg>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -217,4 +217,18 @@ window.onload = function () {
 };
 
     </script>
+    <script>
+    // Get balance from Laravel
+    let balance = {{ auth()->user()->depositBalance->balance ?? 0 }};
+
+    // Calculate 35%
+    let percent = balance * 0.35;
+
+    // Format and display
+    document.getElementById('percentBalance').innerText =
+        '$' + percent.toLocaleString(undefined, {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        });
+</script>
     {{-- <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script> --}}
