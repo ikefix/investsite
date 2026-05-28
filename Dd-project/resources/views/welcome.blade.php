@@ -234,14 +234,14 @@ body{
 <!-- ========================= -->
 <!-- LIVE MARKET TICKER -->
 <!-- ========================= -->
-
+<!-- 
 <section class="ticker-section" id="market">
 
     <div class="ticker-wrapper">
 
         <div class="ticker-track">
 
-            <!-- FIRST LOOP -->
+            FIRST LOOP
 
             @foreach($data as $coin)
 
@@ -275,7 +275,7 @@ body{
 
             @endforeach
 
-            <!-- DUPLICATE FOR INFINITE SLIDE -->
+            DUPLICATE FOR INFINITE SLIDE 
 
             @foreach($data as $coin)
 
@@ -313,7 +313,7 @@ body{
 
     </div>
 
-</section>
+</section> -->
 
 <!-- HERO -->
 

@@ -135,6 +135,21 @@
             </table>
         </div>
     </div>
+    
+    <script>
+    // Get balance from Laravel
+    let balance = {{ auth()->user()->depositBalance->balance ?? 0 }};
+
+    // Calculate 35%
+    let percent = balance * 0.35;
+
+    // Format and display
+    document.getElementById('percentBalance').innerText =
+        '$' + percent.toLocaleString(undefined, {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        });
+</script>
     @endsection
     <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -217,18 +232,4 @@ window.onload = function () {
 };
 
     </script>
-    <script>
-    // Get balance from Laravel
-    let balance = {{ auth()->user()->depositBalance->balance ?? 0 }};
-
-    // Calculate 35%
-    let percent = balance * 0.35;
-
-    // Format and display
-    document.getElementById('percentBalance').innerText =
-        '$' + percent.toLocaleString(undefined, {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
-        });
-</script>
     {{-- <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script> --}}
