@@ -330,7 +330,7 @@ body{
             Online <span>Mirror Trading</span>
         </h1>
 
-        <p>At Finexequitys, we understand that navigating the complex world of finance can be a daunting task. That's why we are here to simplify the process and empower you to make informed decisions about your financial future. As a leading online brokerage platform, we are dedicated to providing you with the tools, resources, and expert guidance you need to achieve your financial goals.</p>
+        <p>At Vartex, we understand that navigating the complex world of finance can be a daunting task. That's why we are here to simplify the process and empower you to make informed decisions about your financial future. As a leading online brokerage platform, we are dedicated to providing you with the tools, resources, and expert guidance you need to achieve your financial goals.</p>
 
         <div class="hero-buttons">
 
