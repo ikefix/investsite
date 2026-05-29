@@ -202,7 +202,7 @@
         <a class="navbar-brand" href="{{ url('/') }}">
 
             <div class="logo">
-                InvestPro
+                VartexTrade
             </div>
 
         </a>

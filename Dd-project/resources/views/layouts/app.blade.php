@@ -1,3 +1,7 @@
+<?php 
+$settings = \App\Models\Setting::pluck('value', 'key');
+?>
+
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
