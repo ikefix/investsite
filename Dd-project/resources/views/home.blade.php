@@ -4,7 +4,7 @@
     @section('content')
     <div class="home-container">
         <div class="message">
-            <a href="https://t.me/Singhal_Anurag" target="_blank"><i class='bx bxl-telegram'></i></a>
+            {{-- <a href="https://t.me/Singhal_Anurag" target="_blank"><i class='bx bxl-telegram'></i></a> --}}
         </div>
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -70,8 +70,8 @@
                         </div>
                     </div>
                     <div class="card">
-                        <h6>Total Referral Commission</h6>
-                        <h4>$0.00</h4>
+                        <h6>ROI</h6>
+                        <h4>${{ number_format(auth()->user()->roiBalance->balance ?? 0, 2) }}</h4>
                         <div class="graph-container">
                             <svg id="graph3">
                                 <defs>
@@ -85,7 +85,7 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="card">
+                    {{-- <div class="card">
                         <h6>Account Stats</h6>
                         <h4>Active</h4>
                         <div class="graph-container">
@@ -100,7 +100,7 @@
                                 <path class="line" stroke="rgb(255, 200, 0)" />
                             </svg>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
