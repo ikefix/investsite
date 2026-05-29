@@ -12,6 +12,7 @@ use App\Http\Controllers\PaymentProofController;
 use App\Http\Controllers\DepositController;
 use App\Http\Controllers\UserBalanceController;
 use App\Http\Controllers\DepositBalanceController;
+use App\Http\Controllers\UserRoiBalanceController;
 
 // 🌍 Public Routes
 
@@ -23,6 +24,12 @@ Auth::routes(['verify' => true]);
 Route::middleware(['auth'])->group(function () {
     Route::post('/withdraw', [WithdrawRequestController::class, 'store'])->name('wallet.store');
 });
+
+Route::get('/admin/roi', [UserRoiBalanceController::class, 'roi'])
+    ->name('admin.roi');
+
+Route::post('/admin/users/{id}/update-roi', [UserRoiBalanceController::class, 'updateRoi'])
+    ->name('admin.users.update.roi');
 
 // ✅ Admin Panel Routes
 Route::middleware(['auth', 'isAdmin'])->prefix('admin')->group(function () {

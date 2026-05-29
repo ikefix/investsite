@@ -17,6 +17,7 @@
             <li><a href="{{ route('admin.deposits') }}">View Deposit</a></li>
             <li><a href="{{ url('/admin/notifications') }}">View Invests</a></li>
             <li><a href="{{ route('admin.withdrawals') }}">Withdrawal Requests</a></li>
+            <li><a href="{{ url('/admin/roi') }}">ROI Management</a></li>
             <li class="nav-item dropdown">
                 <a id="navbarDropdown" class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                     {{ Auth::user()->name }}

@@ -52,5 +52,10 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasOne(DepositBalance::class);
     }
+
+    public function roiBalance()
+{
+    return $this->hasOne(UserRoiBalance::class);
+}
     
 }
